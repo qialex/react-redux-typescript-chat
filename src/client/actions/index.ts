@@ -13,6 +13,12 @@ export type Action = {
 } | {
     type: 'ADD_MESSAGE',
     message: MessageModel
+} | {
+    type: 'LANGUAGE_CHANGE',
+    language: string
+} | {
+    type: 'THEME_CHANGE',
+    theme: string
 }
 
 
@@ -37,4 +43,12 @@ export const addMessageAction = (message: MessageModel): Action => ({
     message
 });
 
+export const changeLanguageAction = (language: string): Action => ({
+    type: 'LANGUAGE_CHANGE',
+    language
+});
 
+export const changeThemeAction = (theme: string): Action => ({
+    type: 'THEME_CHANGE',
+    theme
+});

@@ -1,11 +1,12 @@
 import { Action } from '../actions'
 import { ChatState } from '../state'
-import { User } from "../models"
+import {SettingsDefault, User} from "../models"
 
 const initialState: ChatState = {
     messages: [],
     users: [],
     user: undefined,
+    settings: new SettingsDefault().fromLocalStorage()
 }
 
 export function changeUserName(state: ChatState = initialState, action: Action): ChatState {

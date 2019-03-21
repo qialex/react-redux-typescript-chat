@@ -1,0 +1,13 @@
+@import './assets/styles/mixins';
+
+html, body {
+  margin: 0;
+  height: 100%;
+}
+
+#app {
+  width: 100%;
+  height: 100%;
+  @include background-color('bgColor');
+  @include color('color');
+}

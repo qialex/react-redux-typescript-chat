@@ -1,0 +1,12 @@
+/// $themes contains variables for theming
+/// @access public
+$themes: (
+        'light': (
+                'bgColor' : white,
+                'color'   : black
+        ),
+        'dark': (
+                'bgColor' : black,
+                'color'   : white
+        )
+) !default;

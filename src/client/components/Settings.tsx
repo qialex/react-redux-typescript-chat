@@ -2,17 +2,23 @@ import * as React from 'react'
 import * as redux from 'redux'
 import { connect } from 'react-redux'
 
-import { Action, changeUserNameAction } from '../actions'
+import { Action, changeThemeAction, changeUserNameAction } from '../actions'
 import { ChatState } from '../state'
-import {User} from "../models"
+import { Settings as IeSettings, User } from "../models"
+import { LanguageSelect } from "./languageSelect/LanguageSelect";
+import L from "../localization/localizedStrings";
 
 const mapStateToProps = (state: ChatState, ownProps: OwnProps): ConnectedState => ({
-    user: state.user
+    user: state.user,
+    settings: state.settings,
 })
 
 const mapDispatchToProps = (dispatch: redux.Dispatch<Action>): ConnectedDispatch => ({
     changeUserName: (user: User) => {
         dispatch(changeUserNameAction(user));
+    },
+    changeTheme: (theme: string) => {
+        dispatch(changeThemeAction(theme));
     }
 });
 
@@ -21,11 +27,13 @@ interface OwnProps {
 }
 
 interface ConnectedState {
-    user: User
+    user: User,
+    settings: IeSettings,
 }
 
 interface ConnectedDispatch {
     changeUserName: (user: User) => void
+    changeTheme: (theme: string) => void
 }
 
 interface OwnState {
@@ -47,6 +55,12 @@ export class SettingsComponent extends React.Component<ConnectedState & Connecte
 
             this.setState({username: this.props.user.name})
         }
+    }
+
+    themeChangeHandler = (event: any) => {
+
+        // setting theme
+        this.props.changeTheme(event.target.value)
     }
 
     usernameChangeHandler = (event: any) => {
@@ -86,6 +100,31 @@ export class SettingsComponent extends React.Component<ConnectedState & Connecte
                 { this.state.isValid ? '' : <div>
                     <b>{this.state.username}</b> is occupied. Your name is still <b>{this.props.user.name}</b>
                 </div> }
+
+
+                <div>
+                    <div>Interface color:</div>
+                    <label><input type="radio" name='skin' value='light' checked={this.props.settings.theme === "light"} onChange={this.themeChangeHandler} /> Light</label>
+                    <label><input type="radio" name='skin' value='dark' checked={this.props.settings.theme === "dark"} onChange={this.themeChangeHandler} /> Dark</label>
+                </div>
+
+                <div>
+                    <div>Clock display:</div>
+                    <label><input type="radio" name='clockDisplay' value='12h' /> 12 Hours</label>
+                    <label><input type="radio" name='clockDisplay' value='24h' /> 24 Hours</label>
+                </div>
+
+                <div>
+                    <div>Send message on CTRL+ENTER</div>
+                    <label><input type="radio" name='clockDisplay' value='on' /> On</label>
+                    <label><input type="radio" name='clockDisplay' value='off' /> Off</label>
+                </div>
+
+                <div>
+                    <div>{L.language}</div>
+                    <LanguageSelect />
+                </div>
+
             </form>
         );
     }

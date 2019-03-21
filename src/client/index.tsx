@@ -9,17 +9,21 @@ import {
     changeUserNameAction,
     addMessageAction,
 } from './actions'
-import {initData} from "./reducers/initData"
-import {otherUserJoined} from "./reducers/otherUserJoined"
-
+import { initData } from "./reducers/initData"
+import { otherUserJoined } from "./reducers/otherUserJoined"
 import { addMessage } from './reducers/addMessage'
 import { changeUserName } from './reducers/changeUserName'
-import { App } from './components/App'
+import { changeLanguage } from "./reducers/changeLanguage"
+import { changeTheme } from "./reducers/changeTheme";
+import { App } from './components/app/App'
 
-import {Message, User} from './models'
+import { Message, User } from './models'
 import { ChatState } from './state'
 
 import * as io from 'socket.io-client'
+
+import './index.scss'
+
 
 
 const socket: SocketIOClient.Socket = io('http://localhost:3000')
@@ -32,7 +36,7 @@ function combineReducers(...reducers: Reducer<ChatState>[]) {
     }
 }
 
-let store = createStore(combineReducers(initData, otherUserJoined, addMessage, changeUserName), undefined, (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__())
+let store = createStore(combineReducers(initData, otherUserJoined, addMessage, changeUserName, changeLanguage, changeTheme), undefined, (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__())
 
 // Listen for events from the server
 socket.on('connect', function (data: any) {
