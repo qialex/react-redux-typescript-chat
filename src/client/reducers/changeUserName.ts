@@ -1,15 +1,9 @@
-import { Action } from '../actions'
-import { ChatState } from '../state'
-import {SettingsDefault, User} from "../models"
+import { Action } from './actions'
+import { appInitialState, AppState, User } from '../models'
 
-const initialState: ChatState = {
-    messages: [],
-    users: [],
-    user: undefined,
-    settings: new SettingsDefault().fromLocalStorage()
-}
 
-export function changeUserName(state: ChatState = initialState, action: Action): ChatState {
+export function changeUserName(state: AppState = appInitialState, action: Action): AppState {
+
     if (action.type === 'USER_CHANGE_NAME') {
 
         const userToUpdate = [...state.users, state.user]

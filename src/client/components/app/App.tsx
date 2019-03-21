@@ -1,58 +1,21 @@
 import * as React from 'react'
-import * as redux from 'redux'
-import { connect } from 'react-redux'
+import { Provider } from "react-redux"
 
-import { Action } from '../../actions'
-import { ChatState } from '../../state'
+import { store } from "../../store"
+import { socket } from "../../utils";
 
-import { ChatApp } from '../ChatApp'
-import { HashRouter, Route } from "react-router-dom"
-import { Menu } from "../Menu"
-import { Settings } from "../Settings"
-import { Settings as IeSettings } from "../../models"
-import L from "../../localization/localizedStrings";
+import { MainModule } from "../../modules/main"
 
-const mapStateToProps = (state: ChatState, ownProps: OwnProps): ConnectedState => ({
-    settings: state.settings
-})
+import './app.scss'
 
-const mapDispatchToProps = (dispatch: redux.Dispatch<Action>): ConnectedDispatch => ({
-})
 
-interface OwnProps {
-    socket: any
-}
-
-interface ConnectedState {
-    settings: IeSettings
-}
-
-interface ConnectedDispatch {
-}
-
-interface OwnState {
-}
-
-export class AppComponent extends React.Component<ConnectedState & ConnectedDispatch & OwnProps, OwnState> {
-
-    componentWillMount() {
-
-        // setting language
-        L.setLanguage(this.props.settings.language)
-
-        // adding theme
-        document.body.classList.add(`theme-${this.props.settings.theme}`)
-    }
+export class App extends React.Component {
 
     render() {
         return (
-            <HashRouter>
-                <Menu />
-                <Route path="/" render={() => <ChatApp socket={this.props.socket} />} />
-                <Route path="/settings" render={()=> <Settings socket={this.props.socket}/>} />
-            </HashRouter>
+            <Provider store={store}>
+                <MainModule socket={socket} />
+            </Provider>
         )
     }
 }
-
-export const App: React.ComponentClass<OwnProps> = connect(mapStateToProps, mapDispatchToProps)(AppComponent)

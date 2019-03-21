@@ -1,16 +1,10 @@
-import { Action } from '../actions'
-import { ChatState } from '../state'
-import {SettingsDefault} from "../models";
+import { Action } from './actions'
+import { appInitialState, AppState } from '../models'
 
-const initialState: ChatState = {
-    messages: [],
-    users: [],
-    user: undefined,
-    settings: new SettingsDefault().fromLocalStorage()
-}
+export function addMessage(state: AppState = appInitialState, action: Action): AppState {
 
-export function addMessage(state: ChatState = initialState, action: Action): ChatState {
     if (action.type === 'ADD_MESSAGE') {
+
         return {
             messages: [ ...state.messages, action.message ],
             users: state.users,

@@ -1,17 +1,11 @@
-import { Action } from '../actions'
-import { ChatState } from '../state'
-import {SettingsDefault} from "../models";
+import { Action } from './actions'
+import { appInitialState, AppState } from '../models'
 
-const initialState: ChatState = {
-    messages: [],
-    users: [],
-    user: undefined,
-    settings: new SettingsDefault().fromLocalStorage()
-}
 
-export function initData(state: ChatState = initialState, action: Action): ChatState {
+export function initData(state: AppState = appInitialState, action: Action): AppState {
 
     if (action.type === 'INIT_DATA') {
+
         return {
             messages: [],
             users: [ ...action.users ],
