@@ -11,4 +11,4 @@ React Redux Typescript Chat
    3. `moment.locale()` is also managed, so user will see _just now_ etc in different languages 
 
 ### Localization
-react-localization ([npm](https://www.npmjs.com/package/react-localization)) is used for localization. 2 supported languages: English, Russian.
+react-localization ([npm](https://www.npmjs.com/package/react-localization)) is used for localization. 2 supported languages: English and Russian.
