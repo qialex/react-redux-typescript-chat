@@ -1,9 +1,17 @@
 import * as React from 'react'
 
 import { Message } from "../"
-import { MessageView } from '../../../../../../models'
+import { AppState, MessageView } from '../../../../../../models'
+import { DateType } from '../../../settings/models'
+import { connect } from 'react-redux'
 
 
+
+
+const mapStateToProps = (state: AppState, ownProps: OwnProps): ConnectedState => ({
+    dateType: state.settings.dateType,
+    language: state.settings.language
+})
 
 interface OwnProps {
     clientId: string,
@@ -11,10 +19,15 @@ interface OwnProps {
     users: any[]
 }
 
+interface ConnectedState {
+    dateType: DateType,
+    language: string
+}
+
 interface OwnState {
 }
 
-export class Messages extends React.Component<OwnProps, OwnState> {
+export class MessagesComponent extends React.Component<ConnectedState & OwnProps & OwnState> {
 
     componentDidUpdate() {
         console.log ('Messages componentDidUpdate()')
@@ -25,14 +38,14 @@ export class Messages extends React.Component<OwnProps, OwnState> {
     }
 
     render() {
-        console.log('Messages render()')
-        console.log(this.props.users)
 
         // Loop through all the messages and add a Message for each
         const messages = this.props.messages.map((message: MessageView, i: number) => {
             return (
                 <Message
                     key={i}
+                    dateType={this.props.dateType}
+                    language={this.props.language}
                     message={message} />
             )
         })
@@ -44,3 +57,5 @@ export class Messages extends React.Component<OwnProps, OwnState> {
         )
     }
 }
+
+export const Messages: React.ComponentClass<OwnProps> = connect(mapStateToProps)(MessagesComponent)
