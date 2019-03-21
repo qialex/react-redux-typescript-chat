@@ -13,5 +13,5 @@ export const appInitialState: AppState = {
     messages: [],
     users: [],
     user: undefined,
-    settings: new SettingsDefault().fromLocalStorage()
+    settings: new SettingsDefault().getFromLocalStorage()
 }

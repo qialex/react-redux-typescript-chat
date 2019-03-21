@@ -1,39 +1,59 @@
 import { L } from "../../../../../utils"
 
 export interface Settings {
-    theme: string
-    clockDisplay: '12h' | '24h'
+    theme: Theme
+    dateType: DateType
     language: string
     ctrlEnter: boolean
 }
 
+export enum Theme {
+    light = 'light',
+    dark = 'dark'
+}
+
+export enum DateType {
+    h12 = 'h12',
+    h24 = 'h24'
+}
+
 export class SettingsDefault implements Settings {
-    theme: string
-    clockDisplay: '12h' | '24h'
+
+    theme: Theme
+    dateType: DateType
     language: string
     ctrlEnter: boolean
 
-    constructor() {
-        this.theme = 'light'
-        this.clockDisplay = '24h'
-        this.language = L.getAvailableLanguages()[0]
-        this.ctrlEnter = false
+    constructor(data?: Settings) {
+
+        if (!data) {
+
+            data = this.getDefaults()
+        }
+
+        this.theme          = data.theme
+        this.dateType       = data.dateType
+        this.language       = data.language
+        this.ctrlEnter      = data.ctrlEnter
+
     }
 
-    public serialize(): Settings {
+    public getDefaults(): Settings {
 
-        // return Object.keys(this).reduce((result: object, key: string) => {
-        //     return {...result, [key]: this[key]}
-        // }, {} as Settings)
-        return JSON.parse(JSON.stringify(this))
-    }
-
-    public fromLocalStorage(): Settings {
         return {
-            theme: localStorage.getItem('theme') || this.theme,
-            clockDisplay: localStorage.getItem('clockDisplay') as '12h' | '24h' || this.clockDisplay,
+            theme: Theme.light,
+            dateType: DateType.h12,
+            language: L.getAvailableLanguages()[0],
+            ctrlEnter: false,
+        }
+    }
+
+    public getFromLocalStorage(): Settings {
+        return {
+            theme: localStorage.getItem('theme') as Theme || this.theme,
+            dateType: localStorage.getItem('dateType') as DateType || this.dateType,
             language: localStorage.getItem('language') || this.language,
-            ctrlEnter: !!localStorage.getItem('ctrlEnter') || this.ctrlEnter,
+            ctrlEnter: localStorage.getItem('ctrlEnter') === true.toString() || this.ctrlEnter,
         }
     }
 }

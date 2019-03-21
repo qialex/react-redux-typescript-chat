@@ -6,5 +6,5 @@ export interface SettingsState {
 }
 
 export const settingsInitialState: SettingsState = {
-    settings: new SettingsDefault().fromLocalStorage()
+    settings: new SettingsDefault().getFromLocalStorage()
 }

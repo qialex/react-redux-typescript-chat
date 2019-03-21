@@ -4,6 +4,7 @@ import { L } from "../../../../../utils"
 
 
 export function changeLanguage(state: SettingsState = settingsInitialState, action: Action): SettingsState {
+
     if (action.type === 'LANGUAGE_CHANGE') {
 
         const language: string = action.language

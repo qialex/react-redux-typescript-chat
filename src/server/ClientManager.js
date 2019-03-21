@@ -21,7 +21,7 @@ module.exports = function () {
 
         return !Array.from(clients.values())
             .filter(c => c.user)
-            .find(c => c.user.name === userName)
+            .find(c => c.user.name.toLowerCase() === userName.toLowerCase())
     }
 
     function getGuestNumber() {

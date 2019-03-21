@@ -2,12 +2,13 @@ import * as React from 'react'
 import * as redux from 'redux'
 import { connect } from 'react-redux'
 
-import { Action, changeThemeAction } from '../../redusers/actions'
+import { Action, changeCtrlEnterAction, changeDateTypeAction, changeThemeAction } from '../../redusers/actions'
 import { AppState, User } from '../../../../../../models'
-import { Settings as IeSettings } from "../../models"
+import { DateType, Settings as IeSettings, Theme } from "../../models"
 import { LanguageSelect } from "../";
 import { L }from "../../../../../../utils";
 import { Action as AppAction, changeUserNameAction } from '../../../../../../reducers/actions'
+import { ChangeEvent } from 'react'
 
 
 const mapStateToProps = (state: AppState, ownProps: OwnProps): ConnectedState => ({
@@ -19,8 +20,14 @@ const mapDispatchToProps = (dispatch: redux.Dispatch<Action | AppAction>): Conne
     changeUserName: (user: User) => {
         dispatch(changeUserNameAction(user));
     },
-    changeTheme: (theme: string) => {
+    changeTheme: (theme: Theme) => {
         dispatch(changeThemeAction(theme));
+    },
+    changeDateType: (dateType: DateType) => {
+        dispatch(changeDateTypeAction(dateType));
+    },
+    changeCtrlEnter: (ctrlEnter: boolean) => {
+        dispatch(changeCtrlEnterAction(ctrlEnter));
     }
 });
 
@@ -35,7 +42,9 @@ interface ConnectedState {
 
 interface ConnectedDispatch {
     changeUserName: (user: User) => void
-    changeTheme: (theme: string) => void
+    changeTheme: (theme: Theme) => void
+    changeDateType: (dateType: DateType) => void
+    changeCtrlEnter: (ctrlEnter: boolean) => void
 }
 
 interface OwnState {
@@ -59,21 +68,35 @@ export class SettingsComponent extends React.Component<ConnectedState & Connecte
         }
     }
 
-    themeChangeHandler = (event: any) => {
+    themeChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
 
         // setting theme
-        this.props.changeTheme(event.target.value)
+        this.props.changeTheme(event.target.value as Theme)
     }
 
-    usernameChangeHandler = (event: any) => {
+    dateTypeChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
 
-        this.setState({ username: event.target.value, isValid: true  });
+        // setting dateType
+        this.props.changeDateType(event.target.value as DateType)
+    }
+
+    ctrlEnterChangeHandler = (ctrlEnter: boolean) => {
+
+        // setting ctrlEnter
+        this.props.changeCtrlEnter(ctrlEnter)
+    }
+
+    usernameChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+
+        const value = event.target.value
+
+        this.setState({ username: value, isValid: true  })
 
 
-        if (event.target.value !== this.props.user.name) {
+        if (value !== this.props.user.name) {
             const user: User = {
                 clientId: this.props.user.clientId,
-                name: event.target.value
+                name: value
             }
 
             this.props.socket.emit('userChangeName', user, (result: boolean) => {
@@ -112,14 +135,14 @@ export class SettingsComponent extends React.Component<ConnectedState & Connecte
 
                 <div>
                     <div>Clock display:</div>
-                    <label><input type="radio" name='clockDisplay' value='12h' /> 12 Hours</label>
-                    <label><input type="radio" name='clockDisplay' value='24h' /> 24 Hours</label>
+                    <label><input type="radio" name='dateType' value={DateType.h12} checked={this.props.settings.dateType === DateType.h12} onChange={this.dateTypeChangeHandler} /> 12 Hours</label>
+                    <label><input type="radio" name='dateType' value={DateType.h24} checked={this.props.settings.dateType === DateType.h24} onChange={this.dateTypeChangeHandler} /> 24 Hours</label>
                 </div>
 
                 <div>
                     <div>Send message on CTRL+ENTER</div>
-                    <label><input type="radio" name='clockDisplay' value='on' /> On</label>
-                    <label><input type="radio" name='clockDisplay' value='off' /> Off</label>
+                    <label><input type="radio" name='ctrlEnter' checked={this.props.settings.ctrlEnter} onChange={this.ctrlEnterChangeHandler.bind(this, true)} /> On</label>
+                    <label><input type="radio" name='ctrlEnter' checked={!this.props.settings.ctrlEnter} onChange={this.ctrlEnterChangeHandler.bind(this, false)} /> Off</label>
                 </div>
 
                 <div>

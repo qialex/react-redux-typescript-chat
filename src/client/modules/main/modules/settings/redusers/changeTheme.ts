@@ -1,11 +1,12 @@
 import { Action } from "./actions"
-import { SettingsState, settingsInitialState } from "../models"
+import { SettingsState, settingsInitialState, Theme } from "../models"
 
 
 export function changeTheme(state: SettingsState = settingsInitialState, action: Action): SettingsState {
+
     if (action.type === 'THEME_CHANGE') {
 
-        const theme: string = action.theme
+        const theme: Theme = action.theme
 
         // setting theme
         document.body.className = `theme-${theme}`
