@@ -88,6 +88,8 @@ export class SettingsComponent extends React.Component<ConnectedState & Connecte
 
     usernameChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
 
+        // TODO: latency
+
         const value = event.target.value
 
         this.setState({ username: value, isValid: true  })

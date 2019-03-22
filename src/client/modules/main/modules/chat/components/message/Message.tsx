@@ -74,9 +74,9 @@ export class Message extends React.Component<OwnProps, OwnState>{
 
         return (
             <div className={`message ${fromMe}`}>
-                <div className='username'>
+                { !fromMe ? <div className='username'>
                     { this.props.message.username }
-                </div>
+                </div> : '' }
                 <div className='timestamp'>
                     { dateToDisplay }
                 </div>

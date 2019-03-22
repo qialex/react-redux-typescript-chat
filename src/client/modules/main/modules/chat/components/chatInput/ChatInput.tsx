@@ -79,7 +79,14 @@ export class ChatInputComponent extends React.Component<ConnectedState & OwnProp
         this.setState({ chatInput: event.target.value })
     }
 
-    submitHandler = () => {
+    submitHandler = (event?: any) => {
+
+        if (event && event.preventDefault) {
+
+            // prevent default
+            event.preventDefault()
+        }
+
 
         // if value is not empty
         if (this.state.chatInput.length) {

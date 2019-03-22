@@ -14,6 +14,8 @@ export type Action = {
 } | {
     type: 'ADD_MESSAGE',
     message: Message
+} | {
+    type: 'MARK_ALL_MESSAGES_READ',
 }
 
 
@@ -36,4 +38,8 @@ export const changeUserNameAction = (user: User): Action => ({
 export const addMessageAction = (message: Message): Action => ({
     type: 'ADD_MESSAGE',
     message
+})
+
+export const markAllMessagesReadAction = (): Action => ({
+    type: 'MARK_ALL_MESSAGES_READ',
 })

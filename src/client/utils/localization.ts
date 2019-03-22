@@ -6,7 +6,7 @@ const localizedStrings = new LocalizedStrings({
         thisLanguage: 'english',
         settings: 'settings',
         language: 'language',
-        resetSettings: 'reset settings',
+        resetSettings: 'reset to defaults',
         resetSettingsConfirm: 'are you sure?',
     },
     ru: {

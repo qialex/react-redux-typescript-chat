@@ -6,7 +6,7 @@ import { Action } from '../../../../reducers/actions'
 import { AppState } from '../../../../models'
 
 
-import { HashRouter, Route } from "react-router-dom"
+import { HashRouter, Route, withRouter } from "react-router-dom"
 import { TopMenu } from "../"
 
 
@@ -37,6 +37,8 @@ interface ConnectedDispatch {
 interface OwnState {
 }
 
+const TopMenuWithRouter = withRouter(props => <TopMenu {...props}/>)
+
 export class AppComponent extends React.Component<ConnectedState & ConnectedDispatch & OwnProps, OwnState> {
 
     componentWillMount() {
@@ -49,9 +51,10 @@ export class AppComponent extends React.Component<ConnectedState & ConnectedDisp
     }
 
     render() {
+
         return (
             <HashRouter>
-                <TopMenu />
+                <TopMenuWithRouter />
                 <Route path="/" render={() => <ChatModule socket={this.props.socket} />} />
                 <Route path="/settings" render={()=> <SettingsModule socket={this.props.socket}/>} />
             </HashRouter>
