@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { AppState } from '../../../../../../models'
 import { connect } from 'react-redux'
-
+import EmojiPicker from 'emoji-picker-react'
 
 const mapStateToProps = (state: AppState, ownProps: OwnProps): ConnectedState => ({
     ctrlEnter: state.settings.ctrlEnter,
@@ -99,6 +99,10 @@ export class ChatInputComponent extends React.Component<ConnectedState & OwnProp
         }
     }
 
+    myCallback(event: any) {
+        console.log(event)
+    }
+
     render() {
         return (
             <form noValidate className="chat-input">
@@ -107,6 +111,7 @@ export class ChatInputComponent extends React.Component<ConnectedState & OwnProp
                        value={this.state.chatInput}
                        placeholder="Write a UserMessage..."
                        required />
+                <EmojiPicker onEmojiClick={this.myCallback} />
                 <button onClick={this.submitHandler}>Submit</button>
             </form>
         )

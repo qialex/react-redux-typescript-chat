@@ -16,7 +16,9 @@ export function changeUserName(state: AppState = appInitialState, action: Action
         // updating user names in messages
         state.messages
             .filter((message: Message) => message.user.clientId === action.user.clientId)
-            .map((message: Message) => ({...message, user: action.user}))
+            .map((message: Message) => {
+                message.user = { ...action.user }
+            })
 
         return {...state, messages: state.messages.slice()}
     }

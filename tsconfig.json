@@ -5,9 +5,11 @@
     "noImplicitAny": true,
     "module": "commonjs",
     "target": "ES6",
-    "jsx": "react"
+    "jsx": "react",
+    "allowJs": true
   },
   "include": [
+    "./src/client/typings/**/*",
     "./src/**/*.ts"
   ],
   "exclude": [
