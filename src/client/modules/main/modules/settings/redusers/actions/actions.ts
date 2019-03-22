@@ -2,16 +2,18 @@ import { DateType, Theme } from '../../models'
 
 export type Action = {
     type: 'LANGUAGE_CHANGE',
-    language: string
+    language: string,
 } | {
     type: 'THEME_CHANGE',
-    theme: Theme
+    theme: Theme,
 } | {
     type: 'DATE_TYPE_CHANGE',
-    dateType: DateType
+    dateType: DateType,
 } | {
     type: 'CTRL_ENTER_CHANGE',
-    ctrlEnter: boolean
+    ctrlEnter: boolean,
+} | {
+    type: 'RESET_SETTINGS',
 }
 
 
@@ -33,4 +35,8 @@ export const changeDateTypeAction = (dateType: DateType): Action => ({
 export const changeCtrlEnterAction = (ctrlEnter: boolean): Action => ({
     type: 'CTRL_ENTER_CHANGE',
     ctrlEnter
+})
+
+export const resetSettingsAction = (): Action => ({
+    type: 'RESET_SETTINGS'
 })

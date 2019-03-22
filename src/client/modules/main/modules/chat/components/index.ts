@@ -1,5 +1,5 @@
 export * from './chatApp/ChatApp'
 export * from './chatInput/ChatInput'
 export * from './message/Message'
-export * from './message-body/MessageBody'
+export * from './messageBody/MessageBody'
 export * from './messages/Messages'

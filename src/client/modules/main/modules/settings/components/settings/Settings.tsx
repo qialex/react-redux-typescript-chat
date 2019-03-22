@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { Action, changeCtrlEnterAction, changeDateTypeAction, changeThemeAction } from '../../redusers/actions'
 import { AppState, User } from '../../../../../../models'
 import { DateType, Settings as IeSettings, Theme } from "../../models"
-import { LanguageSelect } from "../";
+import { LanguageSelect, ResetButton } from "../";
 import { L }from "../../../../../../utils";
 import { Action as AppAction, changeUserNameAction } from '../../../../../../reducers/actions'
 import { ChangeEvent } from 'react'
@@ -148,6 +148,10 @@ export class SettingsComponent extends React.Component<ConnectedState & Connecte
                 <div>
                     <div>{L.language}</div>
                     <LanguageSelect />
+                </div>
+
+                <div className="reset-button-wrapper">
+                    <ResetButton language={this.props.settings.language} />
                 </div>
 
             </form>

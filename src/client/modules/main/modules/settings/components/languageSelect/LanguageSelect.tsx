@@ -60,7 +60,7 @@ export class LanguageSelectComponent extends React.Component<ConnectedState & Co
 
         return (
             <div className="setting-language">
-                <select defaultValue={language} onChange={this.handleLanguageChanged}>
+                <select value={language} onChange={this.handleLanguageChanged}>
                     {options}
                 </select>
             </div>
