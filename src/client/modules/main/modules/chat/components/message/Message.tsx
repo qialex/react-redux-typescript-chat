@@ -1,13 +1,13 @@
 import * as React from 'react'
 import * as moment from 'moment'
-import { MessageView } from '../../../../../../models'
+import { Message as IeMessage } from '../../../../../../models'
 import { DateType } from '../../../settings/models'
 import { MessageBody } from '..'
 
 
 interface OwnProps {
     key: number,
-    message: MessageView
+    message: IeMessage
     dateType: DateType
     language: string
 }
@@ -75,7 +75,7 @@ export class Message extends React.Component<OwnProps, OwnState>{
         return (
             <div className={`message ${fromMe}`}>
                 { !fromMe ? <div className='username'>
-                    { this.props.message.username }
+                    { this.props.message.user.name }
                 </div> : '' }
                 <div className='timestamp'>
                     { dateToDisplay }

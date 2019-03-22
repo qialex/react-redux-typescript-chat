@@ -7,7 +7,7 @@ import { Action, addMessageAction } from '../../../../../../reducers/actions'
 
 import { Messages } from '../'
 import { ChatInput } from '../'
-import { AppState, Message, MessageView, User } from '../../../../../../models'
+import { AppState, Message, User } from '../../../../../../models'
 
 
 const mapStateToProps = (state: AppState, ownProps: OwnProps): ConnectedState => ({
@@ -43,7 +43,7 @@ export class ChatAppComponent extends React.Component<ConnectedState & Connected
 
     sendHandler = (messageText: string) => {
         const message: Message = {
-            clientId: this.props.user.clientId,
+            user: this.props.user,
             timestamp: new Date().getTime(),
             message: messageText,
         }
@@ -56,16 +56,10 @@ export class ChatAppComponent extends React.Component<ConnectedState & Connected
     }
 
     render() {
-        const messages: MessageView[] = this.props.messages.map((m: MessageView) => {
-            m.username = [...this.props.users, this.props.user].find(u => u.clientId === m.clientId).name
-            m.isFromMe = this.props.user.clientId === m.clientId
-            return m
-        })
-
         return (
             <div className="container">
                 <h3>React Chat App</h3>
-                <Messages clientId={this.props.user && this.props.user.clientId || ''} users={this.props.users} messages={messages} />
+                <Messages clientId={this.props.user && this.props.user.clientId || ''} users={this.props.users} messages={this.props.messages} />
                 <ChatInput onSend={this.sendHandler} />
             </div>
         )

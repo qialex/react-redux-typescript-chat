@@ -5,6 +5,7 @@ export type Action = {
     type: 'INIT_DATA',
     user: User,
     users: User[],
+    messages: Message[],
 } | {
     type: 'OTHER_USER_JOINED',
     user: User,
@@ -19,10 +20,11 @@ export type Action = {
 }
 
 
-export const initDataAction = (user: User, users: User[]): Action => ({
+export const initDataAction = (user: User, users: User[], messages: Message[]): Action => ({
     type: 'INIT_DATA',
     user,
     users,
+    messages,
 })
 
 export const otherUserJoinedAction = (user: User): Action => ({

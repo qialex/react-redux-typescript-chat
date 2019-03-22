@@ -1,19 +1,23 @@
-module.exports = function (client, clientManager) {
+module.exports = function (client, clientManager, messageManager) {
 
     function handleConnection() {
 
         const otherUsers = clientManager.getUsers()
 
-        const user = clientManager.registerClient(client)
+        const messages = messageManager.getMessages()
 
-        client.emit('initData', {user, otherUsers})
+        const user = clientManager.registerClient(client, messages)
+
+        client.emit('initData', {user, otherUsers, messages})
 
         client.broadcast.emit('otherUserJoined', user)
     }
 
     function handleUserChangeName(user, callback) {
 
-        if (clientManager.isUserAvailable(user.name)) {
+        const messages = messageManager.getMessages()
+
+        if (clientManager.isUserAvailable(user.name, messages)) {
 
             clientManager.updateUserName(client, user.name)
 
@@ -31,19 +35,13 @@ module.exports = function (client, clientManager) {
 
     function handleMessage(message, callback) {
 
-        // const createEntry = () => ({ message })
-        //
-        // handleEvent(chatroomName, createEntry)
-        //     .then(() => callback(null))
-        //     .catch(callback)
-        //
-        // if (!message.user) {
-        //     message.user = clientManager.registerClient(client)
-        // }
-        //
-        // socket.broadcast.emit('message', message)
+        // adding new message and removing old ones
+        messageManager.manageMessage(message)
+
+        // sending message to the other users
         client.broadcast.emit('message', message)
 
+        // returning callback to a current user to ensure him/she that message successfully received
         return callback(true)
     }
 

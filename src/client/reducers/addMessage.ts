@@ -7,7 +7,8 @@ export function addMessage(state: AppState = appInitialState, action: Action): A
 
         const message: Message = action.message
 
-        message.isRead = window.location.hash === '#/' || message.clientId === state.user.clientId
+        message.isFromMe = message.user.clientId === state.user.clientId
+        message.isRead = window.location.hash === '#/' || message.isFromMe
 
         return {
             messages: [ ...state.messages, action.message ],

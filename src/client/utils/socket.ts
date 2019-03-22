@@ -12,10 +12,10 @@ export const socket: SocketIOClient.Socket = io('http://localhost:3000')
 // Listen for events from the server
 socket.on('connect', function (data: any) {
 
-    socket.on('initData', function({ user = {} as User, otherUsers = [] as User[]} = {}) {
+    socket.on('initData', function({ user = {} as User, otherUsers = [] as User[], messages = [] as Message[]} = {}) {
 
         // init data contains current user, other users and few last messages
-        store.dispatch(initDataAction(user, otherUsers))
+        store.dispatch(initDataAction(user, otherUsers, messages))
     })
 
     socket.on('otherUserJoined', function(user: User) {

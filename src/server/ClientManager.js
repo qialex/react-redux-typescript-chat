@@ -3,9 +3,9 @@ module.exports = function () {
     // clients storage
     const clients = new Map()
 
-    function registerClient(client) {
+    function registerClient(client, messages) {
 
-        const user = {name: `[guest]${getGuestNumber()}`, clientId: client.id}
+        const user = {name: `guest${getGuestNumber(messages)}`, clientId: client.id}
 
         clients.set(client.id, { client, user })
 
@@ -17,18 +17,20 @@ module.exports = function () {
         clients.delete(client.id)
     }
 
-    function isUserAvailable(userName) {
+    function isUserAvailable(userName, messages) {
 
-        return !Array.from(clients.values())
+        return ![ ...clients.values()]
+            .concat(messages)
             .filter(c => c.user)
             .find(c => c.user.name.toLowerCase() === userName.toLowerCase())
     }
 
-    function getGuestNumber() {
+    function getGuestNumber(messages) {
 
         const userNumbersArray = [ ...clients.values() ]
-            .filter(c => c.user && /^\[guest\]\w+$/.test(c.user.name))
-            .map(c => +c.user.name.split(']')[1]).sort()
+            .concat(messages)
+            .filter(c => c.user && /^guest\w+$/i.test(c.user.name))
+            .map(c => +c.user.name.split(/^guest/i)[1]).sort()
 
         let number
         for (let n = 1; n <= userNumbersArray[userNumbersArray.length - 1] + 1; n++) {

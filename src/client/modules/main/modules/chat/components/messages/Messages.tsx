@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import { Message } from "../"
-import { AppState, MessageView } from '../../../../../../models'
+import { AppState, Message as IeMessage } from '../../../../../../models'
 import { DateType } from '../../../settings/models'
 import { connect } from 'react-redux'
 
@@ -15,7 +15,7 @@ const mapStateToProps = (state: AppState, ownProps: OwnProps): ConnectedState =>
 
 interface OwnProps {
     clientId: string,
-    messages: MessageView[]
+    messages: IeMessage[]
     users: any[]
 }
 
@@ -40,7 +40,7 @@ export class MessagesComponent extends React.Component<ConnectedState & OwnProps
     render() {
 
         // Loop through all the messages and add a Message for each
-        const messages = this.props.messages.map((message: MessageView, i: number) => {
+        const messages = this.props.messages.map((message: IeMessage, i: number) => {
             return (
                 <Message
                     key={i}

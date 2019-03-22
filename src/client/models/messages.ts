@@ -1,11 +1,9 @@
+import { User } from './user'
+
 export interface Message {
-    clientId: string
+    user: User
     timestamp: number
     message: string
     isRead?: boolean
-}
-
-export interface MessageView extends Message {
-    isFromMe: boolean
-    username: string
+    isFromMe?: boolean
 }
