@@ -2,6 +2,7 @@ import * as React from 'react'
 import * as moment from 'moment'
 import { MessageView } from '../../../../../../models'
 import { DateType } from '../../../settings/models'
+import { MessageBody } from '..'
 
 
 interface OwnProps {
@@ -14,7 +15,7 @@ interface OwnProps {
 interface OwnState {
 }
 
-export class Message extends React.Component<OwnProps, OwnState> {
+export class Message extends React.Component<OwnProps, OwnState>{
 
     static isMessageQuiteFresh(momentObject: moment.Moment): boolean {
 
@@ -36,7 +37,7 @@ export class Message extends React.Component<OwnProps, OwnState> {
         return momentObject.diff(moment(), 'years') === 0
     }
 
-    reRenderByTimeout() {
+    reRenderByTimeout(): void {
         setTimeout(() => {
             this.forceUpdate()
         }, 15 * 1000)
@@ -79,10 +80,10 @@ export class Message extends React.Component<OwnProps, OwnState> {
                 <div className='timestamp'>
                     { dateToDisplay }
                 </div>
-                <div className='message-body'>
-                    { this.props.message.message }
+                <div className='message-body-wrapper'>
+                    <MessageBody message={this.props.message.message} />
                 </div>
             </div>
-        );
+        )
     }
 }
