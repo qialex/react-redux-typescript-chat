@@ -34,8 +34,11 @@ export class ResetButtonComponent extends React.Component<ConnectedDispatch & Ow
 
     componentWillUnmount(): void {
 
-        // clearing timeout
-        clearTimeout(this.state.pressedTimeout)
+        if (this.state.pressedTimeout) {
+
+            // clearing timeout
+            clearTimeout(this.state.pressedTimeout)
+        }
     }
 
     handleResetButtonClicked = (event: any) => {
@@ -68,7 +71,7 @@ export class ResetButtonComponent extends React.Component<ConnectedDispatch & Ow
 
     render() {
 
-        const { pressedTimeout } = this.state
+        const pressedTimeout = this.state.pressedTimeout
 
         return (
             <div className="reset-button">

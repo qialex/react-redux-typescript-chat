@@ -37,6 +37,14 @@ export class ChatInputComponent extends React.Component<ConnectedState & OwnProp
         this.keydownHandler = this.keydownHandler.bind(this)
     }
 
+    focusChatTextarea(): void {
+
+        const el: HTMLInputElement = document.querySelector('.chat-textarea')
+        if (el) {
+            el.focus()
+        }
+    }
+
     keydownHandler(e: KeyboardEvent): void {
 
         // if CTRL+ENTER pressed
@@ -68,11 +76,15 @@ export class ChatInputComponent extends React.Component<ConnectedState & OwnProp
     componentDidUpdate(): void {
 
         this.manageKeyBoardListener()
+
+        this.focusChatTextarea()
     }
 
     componentDidMount(): void {
 
         this.manageKeyBoardListener()
+
+        this.focusChatTextarea()
     }
 
     componentWillUnmount(): void {
@@ -85,28 +97,24 @@ export class ChatInputComponent extends React.Component<ConnectedState & OwnProp
         this.setState({ chatInput: event.target.value })
     }
 
-    submitHandler = (event?: any) => {
+    submitHandler = () => {
 
-        if (event && event.preventDefault) {
-
-            // prevent default
-            event.preventDefault()
-        }
-
+        const value: string = this.state.chatInput.trim()
 
         // if value is not empty
-        if (this.state.chatInput.length) {
+        if (value.length) {
 
             // Call the onSend with the message text
-            this.props.onSend(this.state.chatInput)
+            this.props.onSend(value)
 
             // Clear the input
             this.setState({ chatInput: '' })
         }
     }
 
-    myCallback(event: any) {
-        console.log(event)
+    myCallback({...ddd}) {
+        console.log(arguments)
+        this.setState({isEmojiPickerVisible: !this.state.isEmojiPickerVisible})
     }
 
     emojiPickerToggleHandle() {
@@ -121,6 +129,7 @@ export class ChatInputComponent extends React.Component<ConnectedState & OwnProp
                         +
                     </div>
                     <textarea
+                           className="chat-textarea"
                            onChange={this.textChangeHandler}
                            value={this.state.chatInput}
                            placeholder="Write a UserMessage..."
@@ -129,7 +138,9 @@ export class ChatInputComponent extends React.Component<ConnectedState & OwnProp
                 </form>
 
                 { this.state.isEmojiPickerVisible ?
-                    <EmojiPicker onEmojiClick={this.myCallback} />
+                    <div className="emoji-picker-wrapper">
+                        <EmojiPicker preload onEmojiClick={this.myCallback.bind(this)} />
+                    </div>
                     : '' }
             </div>
         )

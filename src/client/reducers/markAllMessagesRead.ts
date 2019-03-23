@@ -7,7 +7,6 @@ export function markAllMessagesRead(state: AppState = appInitialState, action: A
     if (action.type === 'MARK_ALL_MESSAGES_READ') {
 
         const messages = (state.messages || [])
-            .filter((message: Message) => !message.isRead)
             .map((message: Message) => {
 
                 message.isRead = true

@@ -20,6 +20,10 @@ interface OwnState {
 
 export class Message extends React.Component<OwnProps, OwnState>{
 
+    state: OwnState = {
+        timeout: undefined
+    }
+
     static isMessageQuiteFresh(momentObject: moment.Moment): boolean {
 
         // moment.fromNow will be applied if message was sent less than 3 minutes till now
@@ -40,10 +44,24 @@ export class Message extends React.Component<OwnProps, OwnState>{
         return momentObject.diff(moment(), 'years') === 0
     }
 
+    componentDidUpdate(prevProps: Readonly<OwnProps>, prevState: Readonly<OwnState>, snapshot?: any): void {
+
+        const momentObject: moment.Moment = moment(this.props.message.timestamp).locale(this.props.language)
+
+        // if message was sent a short time ago
+        if (Message.isMessageQuiteFresh(momentObject) && !this.state.timeout) {
+
+            this.reRenderByTimeout()
+        }
+    }
+
     componentWillUnmount(): void {
 
-        // clearing timeout
-        clearTimeout(this.state.timeout)
+        if (this.state.timeout) {
+
+            // clearing timeout
+            clearTimeout(this.state.timeout)
+        }
     }
 
     reRenderByTimeout(): void {
@@ -54,7 +72,7 @@ export class Message extends React.Component<OwnProps, OwnState>{
         }, 15 * 1000)
 
         // saving timeout to state
-        // this.setState({timeout})
+        this.setState({timeout})
     }
 
     render() {
@@ -67,7 +85,6 @@ export class Message extends React.Component<OwnProps, OwnState>{
 
             dateToDisplay = momentObject.fromNow()
 
-            this.reRenderByTimeout()
         } else {
 
             let format = this.props.dateType === DateType.h12 ? 'h:mm a' : 'HH:mm'
@@ -75,6 +92,7 @@ export class Message extends React.Component<OwnProps, OwnState>{
             if (!Message.isMomentInThisYear(momentObject)) {
 
                 format = 'D MMM YYYY ' + format
+
             } else if (!Message.isMomentToday(momentObject)) {
 
                 format = 'D MMM ' + format
@@ -89,11 +107,13 @@ export class Message extends React.Component<OwnProps, OwnState>{
         return (
             <div className="message-wrapper">
                 <div className={`message ${fromMe}`}>
-                    { !fromMe ? <div className='username'>
-                        { this.props.message.user.name }
-                    </div> : '' }
-                    <div className='timestamp'>
-                        { dateToDisplay }
+                    <div className="top-line">
+                        { !fromMe ? <div className='username'>
+                            { this.props.message.user.name },
+                        </div> : '' }
+                        <div className='date-time'>
+                            { dateToDisplay }
+                        </div>
                     </div>
                     <div className='message-body-wrapper'>
                         <MessageBody message={this.props.message.message} />

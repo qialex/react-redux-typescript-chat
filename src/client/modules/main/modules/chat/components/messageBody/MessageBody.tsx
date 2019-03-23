@@ -85,21 +85,47 @@ export class MessageBody extends React.Component<OwnProps, OwnState>{
     }
 
     getMediaAdditions() {
-        return this.state.parsedMessage
+
+        const mediaChunks: TextChunk[] = this.state.parsedMessage
             .filter((textChunk: TextChunk) => textChunk.isMedia)
-            .map((textChunk: TextChunk, i: number) => (
-                !textChunk.youtubeId ? <img key={i} alt={textChunk.text} src={textChunk.text} />
-                    : <div key={i} className="youtube-frame">
-                        <iframe
-                            width="560"
-                            height="315"
-                            src={`https://www.youtube.com/embed/${textChunk.youtubeId}`}
-                            frameBorder="0"
-                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                            allowFullScreen>
-                        </iframe>
+
+        if (!mediaChunks.length) {
+            return
+        }
+
+        const additions = mediaChunks.map((textChunk: TextChunk, i: number) => (
+
+                <div key={i} className="media-item">
+                    <div className="media-url">
+                        <a href={textChunk.text}>{textChunk.text}</a>
                     </div>
+                    <div className="media-content">
+                        {
+                            textChunk.youtubeId ?
+                                <div className="youtube-content">
+                                    <iframe
+                                        src={`https://www.youtube.com/embed/${textChunk.youtubeId}`}
+                                        frameBorder="0"
+                                        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                                        allowFullScreen>
+                                    </iframe>
+                                </div>
+
+                                :
+
+                                <div className="media-image">
+                                    <img alt={textChunk.text} src={textChunk.text} />
+                                </div>
+                        }
+                    </div>
+                </div>
             ))
+
+        return (
+            <div className="media-wrapper">
+                {additions}
+            </div>
+        )
     }
 
     render() {
@@ -109,9 +135,9 @@ export class MessageBody extends React.Component<OwnProps, OwnState>{
                 <div className='message-body-text'>
                     {this.getMessageText()}
                 </div>
-                <div className="message-body-medias">
-                    {this.getMediaAdditions()}
-                </div>
+
+                {this.getMediaAdditions()}
+
             </div>
         )
     }
