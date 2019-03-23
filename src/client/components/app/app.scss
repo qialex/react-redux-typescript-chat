@@ -3,6 +3,7 @@
 html, body {
   margin: 0;
   height: 100%;
+  font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
 }
 
 #app {
@@ -10,4 +11,7 @@ html, body {
   height: 100%;
   @include background-color('bgColor');
   @include color('color');
+
+  display: flex;
+  flex-direction: column;
 }

@@ -1,0 +1,15 @@
+.message-wrapper {
+  display: flex;
+
+  .message {
+    max-width:80%;
+
+    &:not(.from-me) {
+      margin-right: auto;
+    }
+    &.from-me {
+      margin-left: auto;
+    }
+  }
+}
+

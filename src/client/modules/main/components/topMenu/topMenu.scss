@@ -1,0 +1,29 @@
+.top-menu {
+  height: 3em;
+  background-color: #2ec62b;
+  display: flex;
+  align-items: center;
+  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.15);
+  z-index: 2;
+
+  .menu-link {
+    padding: .5em .5em .5em 1em;
+    text-decoration: none;
+    text-transform: capitalize;
+    color: #fff;
+    line-height: 1.5;
+
+    &.is-active .link-text, &:hover .link-text {
+      text-decoration: underline;
+    }
+
+    &:focus {
+      outline: none;
+    }
+
+    sup {
+      color: brown;
+      margin: 0 -.7em 0 .15em;
+    }
+  }
+}

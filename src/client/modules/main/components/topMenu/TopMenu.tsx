@@ -1,10 +1,14 @@
 import * as React from 'react'
-import { connect } from 'react-redux'
-import { Link } from "react-router-dom"
-
-import { AppState, Message } from '../../../../models'
 import * as redux from 'redux'
+import { connect } from 'react-redux'
+import { match, NavLink } from "react-router-dom"
+
 import { Action, markAllMessagesReadAction } from '../../../../reducers/actions'
+import { AppState, Message } from '../../../../models'
+import { L } from '../../../../utils'
+
+import './topMenu.scss'
+import * as H from 'history'
 
 
 const mapStateToProps = (state: AppState, ownProps: OwnProps): ConnectedState => ({
@@ -18,7 +22,7 @@ const mapDispatchToProps = (dispatch: redux.Dispatch<Action>): ConnectedDispatch
 })
 
 interface OwnProps {
-    location: any,
+    location: H.Location,
 }
 
 interface ConnectedState {
@@ -52,17 +56,43 @@ export class TopMenuComponent extends React.Component<OwnProps & ConnectedState 
         }
     }
 
+    isActiveEvent(match: match): boolean {
+
+        return match && match.isExact
+    }
+
     render() {
         const unreadMessagesCount: number = this.getUnreadMessagesCount()
 
         return (
-            <span>
-                <Link to="/">
-                    Chat
-                    { unreadMessagesCount ? <span className="unread-message-count"> ({unreadMessagesCount}) </span> : '' }
-                </Link>
-                <Link to="/settings">Settings</Link>
-            </span>
+            <div className="top-menu">
+                <NavLink
+                    to="/"
+                    className="menu-link"
+                    activeClassName="is-active"
+                    isActive={this.isActiveEvent}>
+
+                    <span className="link-text">
+                        {L.chat}
+                    </span>
+
+                    { unreadMessagesCount ?
+                        <sup className="unread-message-count">
+                            {unreadMessagesCount}
+                        </sup> : '' }
+
+                </NavLink>
+                <NavLink
+                    to="/settings"
+                    className="menu-link"
+                    activeClassName="is-active"
+                    isActive={this.isActiveEvent}>
+
+                    <span className="link-text">
+                        {L.settings}
+                    </span>
+                </NavLink>
+            </div>
         )
     }
 }

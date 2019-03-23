@@ -16,6 +16,8 @@ import { ChatModule } from "../../modules/chat"
 import { Settings } from '../../modules/settings/models'
 import { L } from '../../../../utils'
 
+import './MainRouter.scss'
+
 const mapStateToProps = (state: AppState, ownProps: OwnProps): ConnectedState => ({
     settings: state.settings
 })
@@ -55,8 +57,10 @@ export class AppComponent extends React.Component<ConnectedState & ConnectedDisp
         return (
             <HashRouter>
                 <TopMenuWithRouter />
-                <Route path="/" render={() => <ChatModule socket={this.props.socket} />} />
-                <Route path="/settings" render={()=> <SettingsModule socket={this.props.socket}/>} />
+                <div className="app-routes">
+                    <Route exact path="/" render={() => <ChatModule socket={this.props.socket} />} />
+                    <Route path="/settings" render={()=> <SettingsModule socket={this.props.socket}/>} />
+                </div>
             </HashRouter>
         )
     }

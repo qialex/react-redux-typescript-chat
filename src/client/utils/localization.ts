@@ -4,6 +4,7 @@ import LocalizedStrings from 'react-localization'
 const localizedStrings = new LocalizedStrings({
     en:{
         thisLanguage: 'english',
+        chat: 'chat',
         settings: 'settings',
         language: 'language',
         resetSettings: 'reset to defaults',
@@ -11,6 +12,7 @@ const localizedStrings = new LocalizedStrings({
     },
     ru: {
         thisLanguage: 'русский',
+        chat: 'чат',
         settings: 'настройки',
         language: 'язык',
         resetSettings: 'сбросить настройки',

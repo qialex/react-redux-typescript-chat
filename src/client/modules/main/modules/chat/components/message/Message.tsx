@@ -4,6 +4,8 @@ import { Message as IeMessage } from '../../../../../../models'
 import { DateType } from '../../../settings/models'
 import { MessageBody } from '..'
 
+import './message.scss'
+
 
 interface OwnProps {
     key: number,
@@ -13,6 +15,7 @@ interface OwnProps {
 }
 
 interface OwnState {
+    timeout: number
 }
 
 export class Message extends React.Component<OwnProps, OwnState>{
@@ -37,10 +40,21 @@ export class Message extends React.Component<OwnProps, OwnState>{
         return momentObject.diff(moment(), 'years') === 0
     }
 
+    componentWillUnmount(): void {
+
+        // clearing timeout
+        clearTimeout(this.state.timeout)
+    }
+
     reRenderByTimeout(): void {
-        setTimeout(() => {
+
+        // will refresh component in 15 seconds
+        const timeout: number = window.setTimeout(() => {
             this.forceUpdate()
         }, 15 * 1000)
+
+        // saving timeout to state
+        // this.setState({timeout})
     }
 
     render() {
@@ -73,15 +87,17 @@ export class Message extends React.Component<OwnProps, OwnState>{
         const fromMe = this.props.message.isFromMe ? 'from-me' : ''
 
         return (
-            <div className={`message ${fromMe}`}>
-                { !fromMe ? <div className='username'>
-                    { this.props.message.user.name }
-                </div> : '' }
-                <div className='timestamp'>
-                    { dateToDisplay }
-                </div>
-                <div className='message-body-wrapper'>
-                    <MessageBody message={this.props.message.message} />
+            <div className="message-wrapper">
+                <div className={`message ${fromMe}`}>
+                    { !fromMe ? <div className='username'>
+                        { this.props.message.user.name }
+                    </div> : '' }
+                    <div className='timestamp'>
+                        { dateToDisplay }
+                    </div>
+                    <div className='message-body-wrapper'>
+                        <MessageBody message={this.props.message.message} />
+                    </div>
                 </div>
             </div>
         )

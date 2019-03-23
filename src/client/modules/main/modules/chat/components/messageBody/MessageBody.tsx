@@ -1,5 +1,6 @@
 import * as React from 'react'
 
+import './messageBody.scss'
 
 interface TextChunk {
     text: string

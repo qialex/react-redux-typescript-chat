@@ -1,0 +1,37 @@
+.chat-input-wrapper {
+  //height: 2em;
+  background-color: white;
+  border-top: 1px solid #dcdcdc;
+  line-height: 1;
+
+  form {
+    margin: 0;
+    display: flex;
+    align-items: flex-end;
+
+    .emoji-toggle-icon {
+      margin: .25em 1em .5em .75em;
+      cursor: pointer;
+    }
+
+    textarea {
+      border: 0;
+      resize: none;
+      //background: bisque;
+      flex: 1;
+
+      &:hover, &:focus {
+        outline: none;
+      }
+    }
+
+    .send-button {
+      background-color: #2ec62b;
+      color: #fff;
+      padding: .25em .5em;
+      border-radius: .2em;
+      margin: .25em;
+      cursor: pointer;
+    }
+  }
+}

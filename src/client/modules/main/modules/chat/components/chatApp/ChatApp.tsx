@@ -9,6 +9,8 @@ import { Messages } from '../'
 import { ChatInput } from '../'
 import { AppState, Message, User } from '../../../../../../models'
 
+import './chatApp.scss'
+
 
 const mapStateToProps = (state: AppState, ownProps: OwnProps): ConnectedState => ({
     messages: state.messages,
@@ -57,8 +59,7 @@ export class ChatAppComponent extends React.Component<ConnectedState & Connected
 
     render() {
         return (
-            <div className="container">
-                <h3>React Chat App</h3>
+            <div className="chat-wrapper">
                 <Messages clientId={this.props.user && this.props.user.clientId || ''} users={this.props.users} messages={this.props.messages} />
                 <ChatInput onSend={this.sendHandler} />
             </div>

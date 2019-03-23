@@ -1,7 +1,11 @@
 import * as React from 'react'
-import { AppState } from '../../../../../../models'
 import { connect } from 'react-redux'
 import EmojiPicker from 'emoji-picker-react'
+
+import { AppState } from '../../../../../../models'
+
+import './chatInput.scss'
+
 
 const mapStateToProps = (state: AppState, ownProps: OwnProps): ConnectedState => ({
     ctrlEnter: state.settings.ctrlEnter,
@@ -17,12 +21,14 @@ interface ConnectedState {
 
 interface OwnState {
     chatInput: string
+    isEmojiPickerVisible: boolean
 }
 
 export class ChatInputComponent extends React.Component<ConnectedState & OwnProps, OwnState> {
 
     state = {
-        chatInput: ''
+        chatInput: '',
+        isEmojiPickerVisible: false
     }
 
     constructor(props?: ConnectedState & OwnProps) {
@@ -103,17 +109,29 @@ export class ChatInputComponent extends React.Component<ConnectedState & OwnProp
         console.log(event)
     }
 
+    emojiPickerToggleHandle() {
+        this.setState({isEmojiPickerVisible: !this.state.isEmojiPickerVisible})
+    }
+
     render() {
         return (
-            <form noValidate className="chat-input">
-                <textarea
-                       onChange={this.textChangeHandler}
-                       value={this.state.chatInput}
-                       placeholder="Write a UserMessage..."
-                       required />
-                <EmojiPicker onEmojiClick={this.myCallback} />
-                <button onClick={this.submitHandler}>Submit</button>
-            </form>
+            <div className="chat-input-wrapper">
+                <form noValidate>
+                    <div className="emoji-toggle-icon" onClick={this.emojiPickerToggleHandle.bind(this)}>
+                        +
+                    </div>
+                    <textarea
+                           onChange={this.textChangeHandler}
+                           value={this.state.chatInput}
+                           placeholder="Write a UserMessage..."
+                           required />
+                    <div className="send-button" onClick={this.submitHandler}>Submit</div>
+                </form>
+
+                { this.state.isEmojiPickerVisible ?
+                    <EmojiPicker onEmojiClick={this.myCallback} />
+                    : '' }
+            </div>
         )
     }
 }

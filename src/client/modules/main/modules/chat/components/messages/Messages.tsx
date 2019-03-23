@@ -1,12 +1,11 @@
 import * as React from 'react'
+import { connect } from 'react-redux'
 
 import { Message } from "../"
 import { AppState, Message as IeMessage } from '../../../../../../models'
 import { DateType } from '../../../settings/models'
-import { connect } from 'react-redux'
 
-
-
+import './messages.scss'
 
 const mapStateToProps = (state: AppState, ownProps: OwnProps): ConnectedState => ({
     dateType: state.settings.dateType,
@@ -30,11 +29,13 @@ interface OwnState {
 export class MessagesComponent extends React.Component<ConnectedState & OwnProps & OwnState> {
 
     componentDidUpdate() {
-        console.log ('Messages componentDidUpdate()')
-
         // scroll to the bottom of the element
-        const objDiv = document.getElementById('messageList')
-        objDiv.scrollTop = objDiv.scrollHeight
+        const el: HTMLElement = document.querySelector('.messages-wrapper')
+
+        if(el) {
+            el.scrollTop = el.scrollHeight
+        }
+
     }
 
     render() {
@@ -51,7 +52,7 @@ export class MessagesComponent extends React.Component<ConnectedState & OwnProps
         })
 
         return (
-            <div className='messages' id='messageList'>
+            <div className='messages-wrapper'>
                 { messages }
             </div>
         )
