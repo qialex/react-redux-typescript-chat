@@ -1,10 +1,12 @@
 /// $themes contains variables for theming
 /// @access public
 
+$lightThemeGreen: #2ec62b;
+$darkThemeYellow: #FEDD31;
 
 $themes: (
         'light': (
-                'topMenuBgColor': #2ec62b,
+                'topMenuBgColor': $lightThemeGreen,
                 'topMenuColor': #fff,
                 'topMenuUnreadIconColor': brown,
                 'messagesBgColor': #f2f2f2,
@@ -16,21 +18,22 @@ $themes: (
                 'chatInputBgColor': white,
                 'chatInputColor': black,
                 'chatInputBorderColor': #dcdcdc,
-                'sendButtonBgColor': #2ec62b,
+                'sendButtonBgColor': $lightThemeGreen,
                 'sendButtonColor': #fff,
                 'settingsBgColor': #fff,
                 'settingsColor': black,
-                'resetButtonBgColor': #2ec62b,
+                'resetButtonBgColor': $lightThemeGreen,
                 'resetButtonColor': #fff,
                 'radioConrollerColor': rgba(0, 0, 0, 0.54),
-                'radioConrollerCheckedColor': #2ec62b,
+                'radioConrollerCheckedColor': $lightThemeGreen,
                 'inputBorderColor': #999,
                 'inputFocusBorderColor': black,
+                'validationColor': #E31A1A,
         ),
         'dark': (
                 'topMenuBgColor': #343436,
                 'topMenuColor': #ddd,
-                'topMenuUnreadIconColor': #FEDD31,
+                'topMenuUnreadIconColor': $darkThemeYellow,
                 'messagesBgColor': #111,
                 'messagesAboveBodyColor': #ddd,
                 'messageBodyBgColor': #ddd,
@@ -40,15 +43,16 @@ $themes: (
                 'chatInputBgColor': #111,
                 'chatInputColor': #ddd,
                 'chatInputBorderColor': #dcdcdc,
-                'sendButtonBgColor': #FEDD31,
+                'sendButtonBgColor': $darkThemeYellow,
                 'sendButtonColor': #111,
                 'settingsBgColor': #111,
                 'settingsColor': #ddd,
-                'resetButtonBgColor': #FEDD31,
+                'resetButtonBgColor': $darkThemeYellow,
                 'resetButtonColor': #111,
                 'radioConrollerColor': #ddd,
-                'radioConrollerCheckedColor': #FEDD31,
+                'radioConrollerCheckedColor': $darkThemeYellow,
                 'inputBorderColor': #999,
-                'inputFocusBorderColor': #FEDD31,
+                'inputFocusBorderColor': $darkThemeYellow,
+                'validationColor': #da1919,
         )
 ) !default;

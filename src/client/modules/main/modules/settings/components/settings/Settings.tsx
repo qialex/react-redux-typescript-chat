@@ -5,9 +5,8 @@ import { connect } from 'react-redux'
 import { Action, changeCtrlEnterAction, changeDateTypeAction, changeThemeAction } from '../../redusers/actions'
 import { AppState, User } from '../../../../../../models'
 import { DateType, Settings as IeSettings, Theme } from "../../models"
-import {LanguageSelect, RadioButton, ResetButton} from "../";
-import {L, SocketService} from "../../../../../../utils";
-import { Action as AppAction, changeUserNameAction } from '../../../../../../reducers/actions'
+import { LanguageSelect, RadioButton, ResetButton, UserNameInput } from "../";
+import { L, SocketService } from "../../../../../../utils";
 import { ChangeEvent } from 'react'
 
 import './settings.scss'
@@ -17,10 +16,7 @@ const mapStateToProps = (state: AppState, ownProps: OwnProps): ConnectedState =>
     settings: state.settings,
 })
 
-const mapDispatchToProps = (dispatch: redux.Dispatch<Action | AppAction>): ConnectedDispatch => ({
-    changeUserName: (user: User) => {
-        dispatch(changeUserNameAction(user));
-    },
+const mapDispatchToProps = (dispatch: redux.Dispatch<Action>): ConnectedDispatch => ({
     changeTheme: (theme: Theme) => {
         dispatch(changeThemeAction(theme));
     },
@@ -42,23 +38,12 @@ interface ConnectedState {
 }
 
 interface ConnectedDispatch {
-    changeUserName: (user: User) => void
     changeTheme: (theme: Theme) => void
     changeDateType: (dateType: DateType) => void
     changeCtrlEnter: (ctrlEnter: boolean) => void
 }
 
-interface OwnState {
-    username: string,
-    isValid: boolean,
-}
-
-export class SettingsComponent extends React.Component<ConnectedState & ConnectedDispatch & OwnProps, OwnState> {
-
-    state = {
-        username: this.props.user && this.props.user.name || '',
-        isValid: true
-    }
+export class SettingsComponent extends React.Component<ConnectedState & ConnectedDispatch & OwnProps> {
 
     componentDidUpdate(prevProps: ConnectedState) {
 
@@ -87,48 +72,11 @@ export class SettingsComponent extends React.Component<ConnectedState & Connecte
         this.props.changeCtrlEnter(ctrlEnter)
     }
 
-    usernameChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
-
-        // TODO: latency
-
-        const value = event.target.value
-
-        this.setState({ username: value, isValid: true  })
-
-
-        if (value !== this.props.user.name) {
-            const user: User = {
-                clientId: this.props.user.clientId,
-                name: value
-            }
-
-            this.props.socketService.socket.emit('userChangeName', user, (result: boolean) => {
-                if (result) {
-                    this.props.changeUserName(user);
-                } else {
-                    this.setState({isValid: false})
-                }
-            })
-        }
-    }
-
     render() {
         return (
             <div className="settings-wrapper">
                 <div className="setting-item">
-                    <div className="setting-title">{L.userName}:</div>
-                    <div>
-                        <input
-                            type="text"
-                            onChange={this.usernameChangeHandler}
-                            placeholder={L.enterAUserName}
-                            value={this.state.username}
-                            required />
-                    </div>
-                    { this.state.isValid ? '' : <div className="validation">
-                        <div>{L.occupiedUserName}: <b>{this.state.username}</b></div>
-                        <div>{L.userNameIsStill} <b>{this.props.user.name}</b></div>
-                    </div> }
+                    <UserNameInput socketService={this.props.socketService}/>
                 </div>
 
                 <div className="setting-item">

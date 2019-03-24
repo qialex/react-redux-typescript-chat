@@ -1,0 +1,21 @@
+@import '../../../../../../assets/styles/index';
+
+.user-name-wrapper {
+  .user-name-input {
+
+    .validation {
+      position: absolute;
+      font-size: 70%;
+      line-height: 1;
+      @include color('validationColor');
+
+      div {
+        display: inline-block;
+      }
+    }
+    input {
+      margin-top: 1em;
+    }
+  }
+}
+

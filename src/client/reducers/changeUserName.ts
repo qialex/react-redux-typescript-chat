@@ -6,6 +6,16 @@ export function changeUserName(state: AppState = appInitialState, action: Action
 
     if (action.type === 'USER_CHANGE_NAME') {
 
+        let user: User = {...state.user}
+
+        // checking current user to update
+        if (user.clientId === action.user.clientId) {
+
+            // updating user
+            user.name = action.user.name
+        }
+
+
         // updating user names in messages
         state.messages
             .filter((message: Message) => message.user.clientId === action.user.clientId)
@@ -13,7 +23,7 @@ export function changeUserName(state: AppState = appInitialState, action: Action
                 message.user = { ...action.user }
             })
 
-        return {...state, messages: state.messages.slice()}
+        return {...state, user, messages: state.messages.slice()}
     }
 
     return state

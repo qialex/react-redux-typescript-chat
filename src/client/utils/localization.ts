@@ -22,8 +22,8 @@ const localizedStrings = new LocalizedStrings({
         sendMessageOn: 'send message on',
         on: 'on',
         off: 'off',
-        occupiedUserName: 'occupied user name',
-        userNameIsStill: 'your user name is still',
+        sorryOccupiedUserName: 'Sorry, occupied',
+        userNameCantBeEmpty: 'can\'t be empty',
     },
     ru: {
         thisLanguage: 'русский',
@@ -45,8 +45,8 @@ const localizedStrings = new LocalizedStrings({
         sendMessageOn: 'отправлять сообщения на',
         on: 'вкл',
         off: 'выкл',
-        occupiedUserName: 'занятое имя пользователя',
-        userNameIsStill: 'ваше имя пользователя по-прежнему',
+        sorryOccupiedUserName: 'извините, занято',
+        userNameCantBeEmpty: 'не может быть пустым',
     }
 })
 export const L = localizedStrings
