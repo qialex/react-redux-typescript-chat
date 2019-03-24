@@ -1,9 +1,13 @@
+@import '../../../../../../assets/styles/index';
+
 .message-body {
 
   position: relative;
-  background-color: white;
-  border-radius: .2em;
-  box-shadow: 0 1px 0 1px rgba(0,0,0,0.05);
+  @include background-color('messageBodyBgColor');
+  @include color('messageBodyColor');
+
+  @include border-radius(.2em);
+  @include box-shadow(0 1px 0 1px rgba(0,0,0,0.05));
   overflow: hidden;
 
   .message-body-text {
@@ -13,13 +17,14 @@
     word-break: break-all;
 
     a {
-      color: #999999;
+      @include color('messageBodyLinkColor');
     }
   }
 
   .media-wrapper {
 
-    border-top: 1px dashed rgba(0,0,0,0.1);
+    border-top: 1px dashed;
+    @include border-color('messageMediaBorderColor');
 
     .media-item {
 
@@ -31,7 +36,7 @@
         padding: .5em;
 
         a {
-          color: #999999;
+          @include color('messageBodyLinkColor');
         }
       }
 

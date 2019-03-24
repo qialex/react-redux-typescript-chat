@@ -1,12 +1,38 @@
 /// $themes contains variables for theming
 /// @access public
+
+
 $themes: (
         'light': (
-                'bgColor' : white,
-                'color'   : black
+                'topMenuBgColor': #2ec62b,
+                'topMenuColor': #fff,
+                'topMenuUnreadIconColor': brown,
+                'messagesBgColor': #f2f2f2,
+                'messagesAboveBodyColor': #858585,
+                'messageBodyBgColor': white,
+                'messageBodyColor': black,
+                'messageBodyLinkColor': #999,
+                'messageMediaBorderColor': rgba(0,0,0,0.1),
+                'chatInputBgColor': white,
+                'chatInputColor': black,
+                'chatInputBorderColor': #dcdcdc,
+                'sendButtonBgColor': #2ec62b,
+                'sendButtonColor': #fff,
         ),
         'dark': (
-                'bgColor' : black,
-                'color'   : white
+                'topMenuBgColor': #343436,
+                'topMenuColor': #ccc,
+                'topMenuUnreadIconColor': #FEDD31,
+                'messagesBgColor': black,
+                'messagesAboveBodyColor': #ccc,
+                'messageBodyBgColor': white,
+                'messageBodyColor': black,
+                'messageBodyLinkColor': #999,
+                'messageMediaBorderColor': rgba(0,0,0,0.1),
+                'chatInputBgColor': black,
+                'chatInputColor': white,
+                'chatInputBorderColor': #dcdcdc,
+                'sendButtonBgColor': #343436,
+                'sendButtonColor': #ccc,
         )
 ) !default;

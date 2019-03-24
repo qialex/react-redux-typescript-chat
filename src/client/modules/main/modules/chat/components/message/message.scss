@@ -1,3 +1,5 @@
+@import '../../../../../../assets/styles/index';
+
 .message-wrapper {
 
   display: flex;
@@ -30,7 +32,7 @@
 
       display: flex;
       font-size: .8em;
-      color: #858585;
+      @include color('messagesAboveBodyColor');
       margin-bottom: .2em;
 
       .username {

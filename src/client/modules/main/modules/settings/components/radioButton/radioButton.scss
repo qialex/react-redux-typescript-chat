@@ -1,4 +1,6 @@
-$md-radio-checked-color: rgb(51, 122, 183);
+@import '../../../../../../assets/styles/index';
+
+$md-radio-checked-color: #2ec62b;
 $md-radio-border-color: rgba(0, 0, 0, 0.54);
 $md-radio-size: 1em;
 $md-radio-checked-size: 0.5em;
@@ -6,13 +8,13 @@ $md-radio-ripple-size: .1em;
 
 @keyframes ripple {
   0% {
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.0);
+    @include box-shadow(0 0 0 1px rgba(0, 0, 0, 0.0));
   }
   50% {
-    box-shadow: 0 0 0 $md-radio-ripple-size rgba(0, 0, 0, 0.1);
+    @include box-shadow(0 0 0 $md-radio-ripple-size rgba(0, 0, 0, 0.1));
   }
   100% {
-    box-shadow: 0 0 0 $md-radio-ripple-size rgba(0, 0, 0, 0);
+    @include box-shadow(0 0 0 $md-radio-ripple-size rgba(0, 0, 0, 0));
   }
 }
 
@@ -30,12 +32,12 @@ $md-radio-ripple-size: .1em;
     &:checked + label:before {
 
       border-color: $md-radio-checked-color;
-      animation: ripple 0.2s linear forwards;
+      @include animation(ripple 0.2s linear forwards);
     }
 
     &:checked + label:after {
 
-      transform: scale(1);
+      @include scale(1);
     }
   }
 
@@ -58,8 +60,8 @@ $md-radio-ripple-size: .1em;
 
       position: absolute;
       content: '';
-      border-radius: 50%;
-      transition: all .3s ease;
+      @include border-radius(50%);
+      @include transition(all .3s ease);
       transition-property: transform, border-color;
     }
     &:before {
@@ -76,7 +78,7 @@ $md-radio-ripple-size: .1em;
       left: $md-radio-size / 2 - $md-radio-checked-size / 2;
       width:$md-radio-checked-size;
       height:$md-radio-checked-size;
-      transform: scale(0);
+      @include scale(0);
       background:$md-radio-checked-color;
     }
 

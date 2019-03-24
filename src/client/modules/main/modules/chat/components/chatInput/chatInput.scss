@@ -1,7 +1,10 @@
+@import '../../../../../../assets/styles/index';
+
 .chat-input-wrapper {
-  //height: 2em;
-  background-color: white;
-  border-top: 1px solid #dcdcdc;
+  @include background-color('chatInputBgColor');
+  @include color('chatInputColor');
+  @include border-color('chatInputBorderColor');
+  border-top: 1px solid;
   line-height: 1;
   font-size: 1.2em;
 
@@ -18,12 +21,12 @@
       margin: auto .5em auto auto;
       padding-right: .25em;
       padding-top: .1em;
-      opacity: .8;
-      transition: opacity .3s ease;
+      @include opacity(.8);
+      @include transition(opacity .3s ease);
       cursor: pointer;
 
       &:hover {
-        opacity: 1;
+        @include opacity(1);
       }
 
       @media (max-height:500px) {
@@ -32,10 +35,11 @@
     }
 
     textarea {
+      @include background-color('chatInputBgColor');
+      @include color('chatInputColor');
       border: 0;
       padding: 0 0 1px 0;
       resize: none;
-      //caret-color: #2ec62b;
       margin: auto;
       flex: 1;
 
@@ -45,10 +49,10 @@
     }
 
     .send-button {
-      background-color: #2ec62b;
-      color: #fff;
+      @include background-color('sendButtonBgColor');
+      @include color('sendButtonColor');
       padding: .25em .5em;
-      border-radius: .2em;
+      @include border-radius(.2em);
       margin: .25em;
       cursor: pointer;
       text-transform: capitalize;
@@ -56,12 +60,13 @@
   }
 
   .emoji-picker-wrapper {
+    display: flex;
 
-    @media (min-width:300px) {
+    @media (min-width:285px) {
       position: absolute;
       bottom: 2.25em;
-      border-radius: .2em;
-      box-shadow: 1px 2px 1px 0px rgba(0, 0, 0, 0.05);
+      @include border-radius(.2em);
+      @include box-shadow(1px 2px 1px 0px rgba(0, 0, 0, 0.05));
     }
   }
 }

@@ -1,16 +1,18 @@
+@import '../../../../assets/styles/index';
+
 .top-menu {
   height: 3em;
-  background-color: #2ec62b;
+  @include background-color('topMenuBgColor');
   display: flex;
   align-items: center;
-  box-shadow: 0 2px 3px 0 rgba(0, 0, 0, 0.15);
+  @include box-shadow(0 2px 3px 0 rgba(0, 0, 0, 0.15));
   z-index: 2;
 
   .menu-link {
     padding: .5em .5em .5em 1em;
     text-decoration: none;
     text-transform: capitalize;
-    color: #fff;
+    @include color('topMenuColor');
     line-height: 1.5;
 
     &.is-active {
@@ -26,7 +28,7 @@
     }
 
     sup {
-      color: brown;
+      @include color('topMenuUnreadIconColor');
       margin: 0 -.7em 0 .15em;
     }
   }

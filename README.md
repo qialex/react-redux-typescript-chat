@@ -63,6 +63,6 @@ All settings (except `Username`) are stored in `localStorage`.
 3. No handling of manual url #hash manipulations
 4. No limit for a message length and attached Yutube and Image medias
 5. We agree that browser correctly display Unicode Emoji. It's being displayed as unicode chars (🦄) without any additional libraries.
-6. Emoji picker is not translated
+6. Emoji picker isn't translated as well as skinned
 7. User story: "while user is on setting page he/she received let's say 100 messages. Any count more that one screen can display". Better practice would be to count message as _read_ only when it's appears on a user's screen. But as for now, **all** messages will be counted as _read_ when he/she will return to a chat page
 

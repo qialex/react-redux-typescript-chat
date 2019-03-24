@@ -1,3 +1,5 @@
+@import '../../../../../../assets/styles/index';
+
 .reset-button-wrapper {
 
   .reset-button {
@@ -5,7 +7,7 @@
     background-color: #2ec62b;
     color: #fff;
     padding: .25em .5em;
-    border-radius: .2em;
+    @include border-radius(.2em);
     margin-top: 1em;
     cursor: pointer;
     text-transform: capitalize;
