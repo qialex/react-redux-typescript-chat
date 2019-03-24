@@ -15,7 +15,6 @@ const mapStateToProps = (state: AppState, ownProps: OwnProps): ConnectedState =>
 interface OwnProps {
     clientId: string,
     messages: IeMessage[]
-    users: any[]
 }
 
 interface ConnectedState {

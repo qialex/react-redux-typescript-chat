@@ -1,15 +1,34 @@
+const uuidv4 = require('uuid/v4')
+
 module.exports = function () {
 
     // clients storage
     const clients = new Map()
 
-    function registerClient(client, messages) {
+    function getUserByClientId(clientId) {
 
-        const user = {name: `guest${getGuestNumber(messages)}`, clientId: client.id}
+        return (clients.get(clientId) || {}).user
+    }
 
-        clients.set(client.id, { client, user })
+    function getUserByToken(token) {
 
-        return user
+        return ([...clients.values()].find((_) => _.token === token) || {}).user
+    }
+
+    function getUsers() {
+
+        return [...clients.values()].map(_ => _.user)
+    }
+
+    function registerClient(client) {
+
+        const user = {name: '', id: uuidv4()}
+
+        const token = uuidv4()
+
+        clients.set(client.id, {client, token, user})
+
+        return [user, token]
     }
 
     function removeClient(client) {
@@ -43,23 +62,20 @@ module.exports = function () {
         return number || 1
     }
 
-    function getUserByClientId(clientId) {
-
-        return (clients.get(clientId) || {}).user
-    }
-
     function updateUserName(client, newName) {
 
-        clients.set(client.id, { client, user: {clientId: client.id, name: newName } })
-    }
+        const user = getUserByClientId(client.id)
 
-    function getUsers() {
+        console.log(getUsers())
 
-        return [...clients.values()].map(_ => _.user)
+        user.name = newName
     }
 
     return {
+        getUserByToken,
         registerClient,
+
+
         removeClient,
         isUserAvailable,
         getUserByClientId,

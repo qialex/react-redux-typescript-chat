@@ -3,23 +3,21 @@ const io = require('socket.io')(server)
 
 const handlers = require('./handlers')
 const ClientManager = require('./ClientManager')
-const MessageManager = require('./MessageManager')
 
 const clientManager = ClientManager()
-const messageManager = MessageManager()
 
 io.on('connection', function (client) {
     const {
-        handleConnection,
+        handleJoin,
         handleUserChangeName,
         handleMessage,
         handleDisconnect
-    } = handlers(client, clientManager, messageManager)
+    } = handlers(client, clientManager)
 
     console.log('client connected...', client.id)
 
-    // handling user connection and sending an init data to the client
-    handleConnection()
+    // handling user trying to change name
+    client.on('join', handleJoin)
 
     // handling user trying to change name
     client.on('userChangeName', handleUserChangeName)

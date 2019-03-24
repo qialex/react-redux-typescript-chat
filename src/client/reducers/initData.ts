@@ -6,18 +6,19 @@ export function initData(state: AppState = appInitialState, action: Action): App
 
     if (action.type === 'INIT_DATA') {
 
+        localStorage.setItem('token', action.client.token)
+
         const messages = action.messages.map((message: Message) => {
 
-            message.isFromMe = message.user.clientId === action.user.clientId
-            message.isRead = window.location.hash === '#/' || message.isFromMe
+            // message.isFromMe = message.user.id === action.user.id
+            // message.isRead = window.location.hash === '#/' || message.isFromMe
 
             return message
         })
 
         return {
+            client: action.client,
             messages: messages,
-            users: [ ...action.users ],
-            user: action.user,
             settings: state.settings,
         }
     }

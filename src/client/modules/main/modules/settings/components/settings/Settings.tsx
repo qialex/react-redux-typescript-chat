@@ -13,7 +13,7 @@ import { ChangeEvent } from 'react'
 import './settings.scss'
 
 const mapStateToProps = (state: AppState, ownProps: OwnProps): ConnectedState => ({
-    user: state.user,
+    user: state.client && state.client.user,
     settings: state.settings,
 })
 
@@ -98,7 +98,7 @@ export class SettingsComponent extends React.Component<ConnectedState & Connecte
 
         if (value !== this.props.user.name) {
             const user: User = {
-                clientId: this.props.user.clientId,
+                id: this.props.user.id,
                 name: value
             }
 

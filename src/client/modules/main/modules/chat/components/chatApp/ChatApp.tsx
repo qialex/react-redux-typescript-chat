@@ -14,8 +14,7 @@ import './chatApp.scss'
 
 const mapStateToProps = (state: AppState, ownProps: OwnProps): ConnectedState => ({
     messages: state.messages,
-    users: state.users,
-    user: state.user,
+    user: state.client && state.client.user,
 })
 
 const mapDispatchToProps = (dispatch: redux.Dispatch<Action>): ConnectedDispatch => ({
@@ -30,7 +29,6 @@ interface OwnProps {
 
 interface ConnectedState {
     messages: Message[],
-    users: User[],
     user: User,
 }
 
@@ -60,7 +58,7 @@ export class ChatAppComponent extends React.Component<ConnectedState & Connected
     render() {
         return (
             <div className="chat-wrapper">
-                <Messages clientId={this.props.user && this.props.user.clientId || ''} users={this.props.users} messages={this.props.messages} />
+                <Messages clientId={this.props.user && this.props.user.id || ''} messages={this.props.messages} />
                 <ChatInput onSend={this.sendHandler} />
             </div>
         )

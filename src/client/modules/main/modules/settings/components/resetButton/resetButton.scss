@@ -6,8 +6,9 @@
     color: #fff;
     padding: .25em .5em;
     border-radius: .2em;
-    margin: .25em;
+    margin-top: 1em;
     cursor: pointer;
     text-transform: capitalize;
+    user-select: none;
   }
 }

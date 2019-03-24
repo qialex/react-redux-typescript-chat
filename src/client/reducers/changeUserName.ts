@@ -6,21 +6,20 @@ export function changeUserName(state: AppState = appInitialState, action: Action
 
     if (action.type === 'USER_CHANGE_NAME') {
 
-        // getting user to update
-        const userToUpdate = [...state.users, state.user]
-            .find((user: User) => user.clientId === action.user.clientId)
-
-        // updating user
-        userToUpdate.name = action.user.name
-
         // updating user names in messages
         state.messages
-            .filter((message: Message) => message.user.clientId === action.user.clientId)
+            .filter((message: Message) => message.user.id === action.user.id)
             .map((message: Message) => {
                 message.user = { ...action.user }
             })
 
-        return {...state, messages: state.messages.slice()}
+        // updating user name in client
+        const client = state.client
+        if (client.user.id === action.user.id) {
+            client.user.name = action.user.name
+        }
+
+        return {...state, client: client, messages: state.messages.slice()}
     }
 
     return state

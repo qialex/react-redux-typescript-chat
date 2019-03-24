@@ -6,12 +6,7 @@ export function otherUserJoined(state: AppState = appInitialState, action: Actio
 
     if (action.type === 'OTHER_USER_JOINED') {
 
-        return {
-            messages: state.messages,
-            users: [ ...state.users, action.user ],
-            user: state.user,
-            settings: state.settings,
-        }
+        return { ...state }
     }
 
     return state
