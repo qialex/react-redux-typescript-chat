@@ -2,12 +2,9 @@
 
 select {
 
-  font-family: monospace;
+  @include background-color('settingsBgColor');
+  @include color('settingsColor');
   text-transform: capitalize;
-  font-size: 1.3em;
-  @include background-color('bgColor');
-  @include color('color');
-
   cursor: pointer;
 
   &:focus {

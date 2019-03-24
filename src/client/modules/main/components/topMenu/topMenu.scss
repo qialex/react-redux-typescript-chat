@@ -7,6 +7,7 @@
   align-items: center;
   @include box-shadow(0 2px 3px 0 rgba(0, 0, 0, 0.15));
   z-index: 2;
+  user-select: none;
 
   .menu-link {
     padding: .5em .5em .5em 1em;
@@ -30,6 +31,9 @@
     sup {
       @include color('topMenuUnreadIconColor');
       margin: 0 -.7em 0 .15em;
+      vertical-align: top;
+      position: relative;
+      top: -.3em;
     }
   }
 }

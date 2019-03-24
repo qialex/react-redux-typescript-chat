@@ -3,9 +3,9 @@
 .reset-button-wrapper {
 
   .reset-button {
+    @include background-color('resetButtonBgColor');
+    @include color('resetButtonColor');
     display: inline-block;
-    background-color: #2ec62b;
-    color: #fff;
     padding: .25em .5em;
     @include border-radius(.2em);
     margin-top: 1em;

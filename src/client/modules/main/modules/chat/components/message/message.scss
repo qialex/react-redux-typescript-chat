@@ -33,7 +33,7 @@
       display: flex;
       font-size: .8em;
       @include color('messagesAboveBodyColor');
-      margin-bottom: .2em;
+      margin: 0 .1em .2em;
 
       .username {
 

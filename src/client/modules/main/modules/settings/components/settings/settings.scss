@@ -1,4 +1,10 @@
+@import '../../../../../../assets/styles/index';
+
 .settings-wrapper {
+
+  @include background-color('settingsBgColor');
+  @include color('settingsColor');
+
   padding: 1em;
   line-height: 2;
   display: flex;
@@ -19,4 +25,18 @@
      margin-top: .5em;
    }
  }
+
+  input[type="text"], select {
+    @include background-color('settingsBgColor');
+    @include color('settingsColor');
+    margin-top: .5em;
+    border: 0;
+    border-bottom: 1px solid;
+    @include border-color('inputBorderColor');
+    @include transition(border-color .3s easy);
+    &:focus {
+      outline: none;
+      @include border-color('inputFocusBorderColor');
+    }
+  }
 }

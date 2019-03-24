@@ -31,7 +31,7 @@ $md-radio-ripple-size: .1em;
 
     &:checked + label:before {
 
-      border-color: $md-radio-checked-color;
+      @include border-color('radioConrollerCheckedColor');
       @include animation(ripple 0.2s linear forwards);
     }
 
@@ -70,7 +70,8 @@ $md-radio-ripple-size: .1em;
       top: 0;
       width: calc(#{$md-radio-size} - 4px);
       height: calc(#{$md-radio-size} - 4px);
-      border: 2px solid $md-radio-border-color;
+      border: 2px solid;
+      @include border-color('radioConrollerColor');
     }
     &:after {
 
@@ -79,7 +80,7 @@ $md-radio-ripple-size: .1em;
       width:$md-radio-checked-size;
       height:$md-radio-checked-size;
       @include scale(0);
-      background:$md-radio-checked-color;
+      @include background-color('radioConrollerCheckedColor');
     }
 
   }

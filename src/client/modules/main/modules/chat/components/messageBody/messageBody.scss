@@ -10,6 +10,15 @@
   @include box-shadow(0 1px 0 1px rgba(0,0,0,0.05));
   overflow: hidden;
 
+  a {
+    cursor: pointer;
+    @include opacity(.8);
+    @include transition(opacity .3s easy);
+    &:hover {
+      @include opacity(1);
+    }
+  }
+
   .message-body-text {
 
     white-space: pre-wrap;

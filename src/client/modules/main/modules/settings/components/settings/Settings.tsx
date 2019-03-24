@@ -192,9 +192,7 @@ export class SettingsComponent extends React.Component<ConnectedState & Connecte
                     <LanguageSelect />
                 </div>
 
-                <div className="setting-item">
-                    <ResetButton language={this.props.settings.language} />
-                </div>
+                <ResetButton language={this.props.settings.language} />
 
             </div>
         )
