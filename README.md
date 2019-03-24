@@ -9,19 +9,21 @@ React Redux Typescript Chat app
 
 
 ## Server
-
+1. Custom server.
+2. When user joining server will send up to 10 previous messages.
+3. server is listening and broadcasting following events: joining new users, changing user name, new message.
 
 ## App
 
 ### Localization
 **react-localization** ([npm](https://www.npmjs.com/package/react-localization)) is used for localization. 2 supported languages.
 
-## Chat Page
-
 ### Top menu
 Two links on _Chat_ and _Settings_, active is underlined.
 ##### Unread messages count
 Displayed in top menu. While user is on a **settings** page all messages that he/she receiving counted as unread. When he/she will back on a chat page, **all** messages will be count as read   
+
+## Chat Page
 
 ### Messages
 Own messages displayed on the right, the reset - on the left.

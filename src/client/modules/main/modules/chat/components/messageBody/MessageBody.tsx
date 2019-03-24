@@ -74,7 +74,7 @@ export class MessageBody extends React.Component<OwnProps, OwnState>{
 
     static isUrlImage(url: string): boolean {
 
-        return /^http:\/\/.+\.(gif|png|jpg|jpeg)$/i.test(url)
+        return /^https?:\/\/.+\.(gif|png|jpg|jpeg)$/i.test(url)
     }
 
     getMessageText() {
