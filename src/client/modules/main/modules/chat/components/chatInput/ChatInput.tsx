@@ -142,22 +142,27 @@ export class ChatInputComponent extends React.Component<ConnectedState & OwnProp
         this.setState({isEmojiPickerVisible: !this.state.isEmojiPickerVisible})
     }
 
+    getTextAreaRowsCount(): number {
+        return Math.min(this.state.chatInput.split(/\n/).length, 5)
+    }
+
+
     render() {
         return (
             <div className="chat-input-wrapper">
-                <form noValidate>
+                <div className="chat-input-panel">
                     <div className="emoji-toggle-icon" onClick={this.emojiPickerToggleHandle.bind(this)}>
                         🙂
                     </div>
                     <textarea
+                           rows={this.getTextAreaRowsCount()}
                            className="chat-textarea"
                            onChange={this.textChangeHandler}
                            onSelect={this.textChangeHandler}
                            value={this.state.chatInput}
-                           placeholder={L.writeAMessage}
-                           required />
+                           placeholder={L.writeAMessage}/>
                     <div className="send-button" onClick={this.submitHandler}>{L.send}</div>
-                </form>
+                </div>
 
                 { this.state.isEmojiPickerVisible ?
                     <div className="emoji-picker-wrapper">

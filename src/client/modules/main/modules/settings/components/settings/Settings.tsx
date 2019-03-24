@@ -168,7 +168,7 @@ export class SettingsComponent extends React.Component<ConnectedState & Connecte
                 </div>
 
                 <div className="setting-item">
-                    <div className="setting-title">{L.sendMessageOn} CTRL+ENTER</div>
+                    <div className="setting-title">{L.sendMessageOn} CTRL+ENTER:</div>
                     <div className="setting-values">
                         <RadioButton
                             name='ctrlEnter'

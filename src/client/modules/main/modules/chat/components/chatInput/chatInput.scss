@@ -3,21 +3,40 @@
   background-color: white;
   border-top: 1px solid #dcdcdc;
   line-height: 1;
+  font-size: 1.2em;
 
-  form {
+  .chat-input-panel {
     margin: 0;
     display: flex;
     align-items: flex-end;
 
+    &:nth-child(1) {
+      padding-left: .5em;
+    }
+
     .emoji-toggle-icon {
-      margin: .25em 1em .5em .75em;
+      margin: auto .5em auto auto;
+      padding-right: .25em;
+      padding-top: .1em;
+      opacity: .8;
+      transition: opacity .3s ease;
       cursor: pointer;
+
+      &:hover {
+        opacity: 1;
+      }
+
+      @media (max-height:500px) {
+        display: none;
+      }
     }
 
     textarea {
       border: 0;
+      padding: 0 0 1px 0;
       resize: none;
       //caret-color: #2ec62b;
+      margin: auto;
       flex: 1;
 
       &:hover, &:focus {
