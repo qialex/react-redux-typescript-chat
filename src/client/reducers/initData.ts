@@ -16,7 +16,6 @@ export function initData(state: AppState = appInitialState, action: Action): App
 
         return {
             messages: messages,
-            users: [ ...action.users ],
             user: action.user,
             settings: state.settings,
         }

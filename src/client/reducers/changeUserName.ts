@@ -6,13 +6,6 @@ export function changeUserName(state: AppState = appInitialState, action: Action
 
     if (action.type === 'USER_CHANGE_NAME') {
 
-        // getting user to update
-        const userToUpdate = [...state.users, state.user]
-            .find((user: User) => user.clientId === action.user.clientId)
-
-        // updating user
-        userToUpdate.name = action.user.name
-
         // updating user names in messages
         state.messages
             .filter((message: Message) => message.user.clientId === action.user.clientId)

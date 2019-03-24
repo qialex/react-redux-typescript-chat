@@ -14,6 +14,7 @@ React Redux Typescript Chat app
 3. server is listening and broadcasting following events: joining new users, changing user name, new message.
 
 ## App
+It's responsive. Tested in Chrome (v 73.0.3683.75) and Firefox (v66.0). In desktop, tablet, and mobile resolutions (horizontal and vertical) 
 
 ### Localization
 **react-localization** ([npm](https://www.npmjs.com/package/react-localization)) is used for localization. 2 supported languages.
@@ -67,4 +68,3 @@ All settings (except `Username`) are stored in `localStorage`.
 5. We agree that browser correctly display Unicode Emoji. It's being displayed as unicode chars (🦄) without any additional libraries.
 6. Emoji picker isn't translated as well as skinned
 7. User story: "while user is on setting page he/she received let's say 100 messages. Any count more that one screen can display". Better practice would be to count message as _read_ only when it's appears on a user's screen. But as for now, **all** messages will be counted as _read_ when he/she will return to a chat page
-

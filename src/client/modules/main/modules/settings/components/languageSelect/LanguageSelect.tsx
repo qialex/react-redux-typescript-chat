@@ -10,6 +10,7 @@ import { Action, changeLanguageAction } from '../../redusers/actions'
 
 import './languageSelect.scss'
 import { L } from "../../../../../../utils"
+import {ChangeEvent} from "react";
 
 
 const mapStateToProps = (state: AppState, ownProps: OwnProps): ConnectedState => ({
@@ -38,7 +39,7 @@ interface OwnState {
 
 export class LanguageSelectComponent extends React.Component<ConnectedState & ConnectedDispatch & OwnProps, OwnState> {
 
-    handleLanguageChanged = (event: any) => {
+    handleLanguageChanged = (event: ChangeEvent<HTMLSelectElement>) => {
 
         // selected language abbreviation
         const language = event.target.value

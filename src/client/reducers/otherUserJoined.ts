@@ -8,7 +8,6 @@ export function otherUserJoined(state: AppState = appInitialState, action: Actio
 
         return {
             messages: state.messages,
-            users: [ ...state.users, action.user ],
             user: state.user,
             settings: state.settings,
         }

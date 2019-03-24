@@ -39,6 +39,7 @@ export class ChatInputComponent extends React.Component<ConnectedState & OwnProp
         super(props)
 
         this.keydownHandler = this.keydownHandler.bind(this)
+        this.emojiPickerClickOutsideHandler = this.emojiPickerClickOutsideHandler.bind(this)
     }
 
     focusChatTextarea(): void {
@@ -139,7 +140,27 @@ export class ChatInputComponent extends React.Component<ConnectedState & OwnProp
     }
 
     emojiPickerToggleHandle() {
+
+        // managing closing emoji on click outside of it
+        if (this.state.isEmojiPickerVisible) {
+
+            document.removeEventListener('click', this.emojiPickerClickOutsideHandler)
+            document.removeEventListener('tap', this.emojiPickerClickOutsideHandler)
+        } else {
+
+            document.addEventListener('click', this.emojiPickerClickOutsideHandler)
+            document.addEventListener('tap', this.emojiPickerClickOutsideHandler)
+        }
+
         this.setState({isEmojiPickerVisible: !this.state.isEmojiPickerVisible})
+    }
+
+    emojiPickerClickOutsideHandler(event: MouseEvent) {
+
+        if (!(event.target as HTMLElement).closest('.emoji-picker-wrapper')) {
+
+            this.emojiPickerToggleHandle()
+        }
     }
 
     getTextAreaRowsCount(): number {

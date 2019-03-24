@@ -32,10 +32,10 @@ export class SocketService {
 
             this._initialized = true
 
-            socket.on('initData', function({ user = {} as User, otherUsers = [] as User[], messages = [] as Message[]} = {}) {
+            socket.on('initData', function({ user = {} as User, messages = [] as Message[]} = {}) {
 
                 // init data contains current user, other users and few last messages
-                store.dispatch(initDataAction(user, otherUsers, messages))
+                store.dispatch(initDataAction(user, messages))
             })
 
             socket.on('otherUserJoined', function(user: User) {

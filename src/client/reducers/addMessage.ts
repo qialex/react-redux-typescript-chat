@@ -12,7 +12,6 @@ export function addMessage(state: AppState = appInitialState, action: Action): A
 
         return {
             messages: [ ...state.messages, action.message ],
-            users: state.users,
             user: state.user,
             settings: state.settings
         }

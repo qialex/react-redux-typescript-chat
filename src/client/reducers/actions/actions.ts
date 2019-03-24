@@ -4,7 +4,6 @@ import {Message, User} from '../../models';
 export type Action = {
     type: 'INIT_DATA',
     user: User,
-    users: User[],
     messages: Message[],
 } | {
     type: 'OTHER_USER_JOINED',
@@ -20,10 +19,9 @@ export type Action = {
 }
 
 
-export const initDataAction = (user: User, users: User[], messages: Message[]): Action => ({
+export const initDataAction = (user: User, messages: Message[]): Action => ({
     type: 'INIT_DATA',
     user,
-    users,
     messages,
 })
 

@@ -41,9 +41,7 @@ export class ResetButtonComponent extends React.Component<ConnectedDispatch & Ow
         }
     }
 
-    handleResetButtonClicked = (event: any) => {
-
-        event.preventDefault()
+    handleResetButtonClicked(): void {
 
         if (this.state.pressedTimeout) {
 
@@ -66,7 +64,6 @@ export class ResetButtonComponent extends React.Component<ConnectedDispatch & Ow
 
             this.setState({pressedTimeout})
         }
-
     }
 
     render() {
@@ -75,7 +72,7 @@ export class ResetButtonComponent extends React.Component<ConnectedDispatch & Ow
 
         return (
             <div className="reset-button-wrapper">
-                <div className="reset-button" onClick={this.handleResetButtonClicked}>
+                <div className="reset-button" onClick={this.handleResetButtonClicked.bind(this)}>
                     {pressedTimeout ? L.resetSettingsConfirm : L.resetSettings}
                 </div>
             </div>

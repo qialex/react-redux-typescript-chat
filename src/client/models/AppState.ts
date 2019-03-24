@@ -3,7 +3,6 @@ import { Settings, SettingsDefault } from '../modules/main/modules/settings/mode
 
 export interface AppState {
     messages: Message[]
-    users: User[]
     user: User
     settings: Settings
 }
@@ -11,7 +10,6 @@ export interface AppState {
 
 export const appInitialState: AppState = {
     messages: [],
-    users: [],
     user: undefined,
     settings: new SettingsDefault().getFromLocalStorage()
 }
