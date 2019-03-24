@@ -14,7 +14,7 @@ import { TopMenu } from "../"
 import { SettingsModule } from "../../modules/settings"
 import { ChatModule } from "../../modules/chat"
 import { Settings } from '../../modules/settings/models'
-import { L } from '../../../../utils'
+import {L, SocketService} from '../../../../utils'
 
 import './MainRouter.scss'
 
@@ -26,7 +26,7 @@ const mapDispatchToProps = (dispatch: redux.Dispatch<Action>): ConnectedDispatch
 })
 
 interface OwnProps {
-    socket: SocketIOClient.Socket
+    socketService: SocketService
 }
 
 interface ConnectedState {
@@ -58,8 +58,8 @@ export class AppComponent extends React.Component<ConnectedState & ConnectedDisp
             <HashRouter>
                 <TopMenuWithRouter />
                 <div className="app-routes">
-                    <Route exact path="/" render={() => <ChatModule socket={this.props.socket} />} />
-                    <Route path="/settings" render={()=> <SettingsModule socket={this.props.socket}/>} />
+                    <Route exact path="/" render={() => <ChatModule socketService={this.props.socketService} />} />
+                    <Route path="/settings" render={()=> <SettingsModule socketService={this.props.socketService}/>} />
                 </div>
             </HashRouter>
         )

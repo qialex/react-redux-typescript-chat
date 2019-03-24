@@ -1,16 +1,17 @@
 import * as React from 'react'
 import { Settings } from "./components"
+import {SocketService} from "../../../../utils";
 
 
 interface OwnProps {
-    socket: SocketIOClient.Socket
+    socketService: SocketService
 }
 
 export class SettingsModule extends React.Component<OwnProps> {
 
     render() {
         return (
-            <Settings socket={this.props.socket}/>
+            <Settings socketService={this.props.socketService}/>
         )
     }
 }

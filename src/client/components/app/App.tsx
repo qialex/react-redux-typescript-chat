@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Provider } from "react-redux"
 
 import { store } from "../../store"
-import { socket } from "../../utils";
+import { socketService } from "../../utils";
 
 import { MainModule } from "../../modules/main"
 
@@ -14,7 +14,7 @@ export class App extends React.Component {
     render() {
         return (
             <Provider store={store}>
-                <MainModule socket={socket} />
+                <MainModule socketService={socketService} />
             </Provider>
         )
     }

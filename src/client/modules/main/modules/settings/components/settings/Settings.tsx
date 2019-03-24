@@ -6,7 +6,7 @@ import { Action, changeCtrlEnterAction, changeDateTypeAction, changeThemeAction 
 import { AppState, User } from '../../../../../../models'
 import { DateType, Settings as IeSettings, Theme } from "../../models"
 import {LanguageSelect, RadioButton, ResetButton} from "../";
-import { L }from "../../../../../../utils";
+import {L, SocketService} from "../../../../../../utils";
 import { Action as AppAction, changeUserNameAction } from '../../../../../../reducers/actions'
 import { ChangeEvent } from 'react'
 
@@ -33,7 +33,7 @@ const mapDispatchToProps = (dispatch: redux.Dispatch<Action | AppAction>): Conne
 });
 
 interface OwnProps {
-    socket: SocketIOClient.Socket
+    socketService: SocketService
 }
 
 interface ConnectedState {
@@ -102,7 +102,7 @@ export class SettingsComponent extends React.Component<ConnectedState & Connecte
                 name: value
             }
 
-            this.props.socket.emit('userChangeName', user, (result: boolean) => {
+            this.props.socketService.socket.emit('userChangeName', user, (result: boolean) => {
                 if (result) {
                     this.props.changeUserName(user);
                 } else {

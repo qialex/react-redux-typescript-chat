@@ -10,6 +10,7 @@ import { ChatInput } from '../'
 import { AppState, Message, User } from '../../../../../../models'
 
 import './chatApp.scss'
+import {SocketService} from "../../../../../../utils";
 
 
 const mapStateToProps = (state: AppState, ownProps: OwnProps): ConnectedState => ({
@@ -25,7 +26,7 @@ const mapDispatchToProps = (dispatch: redux.Dispatch<Action>): ConnectedDispatch
 })
 
 interface OwnProps {
-    socket: SocketIOClient.Socket,
+    socketService: SocketService
 }
 
 interface ConnectedState {
@@ -50,7 +51,7 @@ export class ChatAppComponent extends React.Component<ConnectedState & Connected
             message: messageText,
         }
 
-        this.props.socket.send(message, (result: boolean)=> {
+        this.props.socketService.socket.send(message, (result: boolean)=> {
             if (result) {
                 this.props.addMessage(message)
             }
