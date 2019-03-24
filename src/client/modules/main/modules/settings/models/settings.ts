@@ -44,7 +44,7 @@ export class SettingsDefault implements Settings {
             theme: Theme.light,
             dateType: DateType.h12,
             language: L.getAvailableLanguages()[0],
-            ctrlEnter: false,
+            ctrlEnter: true,
         }
     }
 

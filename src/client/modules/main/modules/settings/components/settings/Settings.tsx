@@ -5,11 +5,12 @@ import { connect } from 'react-redux'
 import { Action, changeCtrlEnterAction, changeDateTypeAction, changeThemeAction } from '../../redusers/actions'
 import { AppState, User } from '../../../../../../models'
 import { DateType, Settings as IeSettings, Theme } from "../../models"
-import { LanguageSelect, ResetButton } from "../";
+import {LanguageSelect, RadioButton, ResetButton} from "../";
 import { L }from "../../../../../../utils";
 import { Action as AppAction, changeUserNameAction } from '../../../../../../reducers/actions'
 import { ChangeEvent } from 'react'
 
+import './settings.scss'
 
 const mapStateToProps = (state: AppState, ownProps: OwnProps): ConnectedState => ({
     user: state.user,
@@ -68,19 +69,19 @@ export class SettingsComponent extends React.Component<ConnectedState & Connecte
         }
     }
 
-    themeChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    themeChangeHandler(event: ChangeEvent<HTMLInputElement>): void {
 
         // setting theme
         this.props.changeTheme(event.target.value as Theme)
     }
 
-    dateTypeChangeHandler = (event: ChangeEvent<HTMLInputElement>) => {
+    dateTypeChangeHandler(event: ChangeEvent<HTMLInputElement>): void {
 
         // setting dateType
         this.props.changeDateType(event.target.value as DateType)
     }
 
-    ctrlEnterChangeHandler = (ctrlEnter: boolean) => {
+    ctrlEnterChangeHandler(ctrlEnter: boolean): void {
 
         // setting ctrlEnter
         this.props.changeCtrlEnter(ctrlEnter)
@@ -113,51 +114,90 @@ export class SettingsComponent extends React.Component<ConnectedState & Connecte
 
     render() {
         return (
-            <form className="username-container">
-                <h1>Settings</h1>
-                <div>User name:</div>
-                <div>
-                    <input
-                        type="text"
-                        onChange={this.usernameChangeHandler}
-                        placeholder="Enter a username..."
-                        value={this.state.username}
-                        required />
-                </div>
-                { this.state.isValid ? '' : <div>
-                    <b>{this.state.username}</b> is occupied. Your name is still <b>{this.props.user.name}</b>
-                </div> }
-
-
-                <div>
-                    <div>Interface color:</div>
-                    <label><input type="radio" name='skin' value='light' checked={this.props.settings.theme === "light"} onChange={this.themeChangeHandler} /> Light</label>
-                    <label><input type="radio" name='skin' value='dark' checked={this.props.settings.theme === "dark"} onChange={this.themeChangeHandler} /> Dark</label>
+            <div className="settings-wrapper">
+                <div className="setting-item">
+                    <div className="setting-title">{L.userName}:</div>
+                    <div>
+                        <input
+                            type="text"
+                            onChange={this.usernameChangeHandler}
+                            placeholder={L.enterAUserName}
+                            value={this.state.username}
+                            required />
+                    </div>
+                    { this.state.isValid ? '' : <div className="validation">
+                        <div>{L.occupiedUserName}: <b>{this.state.username}</b></div>
+                        <div>{L.userNameIsStill} <b>{this.props.user.name}</b></div>
+                    </div> }
                 </div>
 
-                <div>
-                    <div>Clock display:</div>
-                    <label><input type="radio" name='dateType' value={DateType.h12} checked={this.props.settings.dateType === DateType.h12} onChange={this.dateTypeChangeHandler} /> 12 Hours</label>
-                    <label><input type="radio" name='dateType' value={DateType.h24} checked={this.props.settings.dateType === DateType.h24} onChange={this.dateTypeChangeHandler} /> 24 Hours</label>
+                <div className="setting-item">
+                    <div className="setting-title">{L.interfaceColor}:</div>
+                    <div className="setting-values">
+                        <RadioButton
+                            name='skin'
+                            checked={this.props.settings.theme === Theme.light}
+                            value={Theme.light}
+                            label={L.light}
+                            onChange={this.themeChangeHandler.bind(this)}/>
+                        <RadioButton
+                            name='skin'
+                            checked={this.props.settings.theme === Theme.dark}
+                            value={Theme.dark}
+                            label={L.dark}
+                            onChange={this.themeChangeHandler.bind(this)}/>
+                    </div>
                 </div>
 
-                <div>
-                    <div>Send message on CTRL+ENTER</div>
-                    <label><input type="radio" name='ctrlEnter' checked={this.props.settings.ctrlEnter} onChange={this.ctrlEnterChangeHandler.bind(this, true)} /> On</label>
-                    <label><input type="radio" name='ctrlEnter' checked={!this.props.settings.ctrlEnter} onChange={this.ctrlEnterChangeHandler.bind(this, false)} /> Off</label>
+                <div className="setting-item">
+                    <div className="setting-title">{L.clockDisplay}:</div>
+                    <div className="setting-values">
+                        <RadioButton
+                            name='dateType'
+                            checked={this.props.settings.dateType === DateType.h12}
+                            value={DateType.h12}
+                            label={L.h12}
+                            onChange={this.dateTypeChangeHandler.bind(this)}/>
+                        <RadioButton
+                            name='dateType'
+                            checked={this.props.settings.dateType === DateType.h24}
+                            value={DateType.h24}
+                            label={L.h24}
+                            onChange={this.dateTypeChangeHandler.bind(this)}/>
+                    </div>
                 </div>
 
-                <div>
-                    <div>{L.language}</div>
+                <div className="setting-item">
+                    <div className="setting-title">{L.sendMessageOn} CTRL+ENTER</div>
+                    <div className="setting-values">
+                        <RadioButton
+                            name='ctrlEnter'
+                            checked={this.props.settings.ctrlEnter}
+                            value={'true'}
+                            label={L.on}
+                            onChange={this.ctrlEnterChangeHandler.bind(this, true)}
+                        />
+                        <RadioButton
+                            name='ctrlEnter'
+                            checked={!this.props.settings.ctrlEnter}
+                            value={'false'}
+                            label={L.off}
+                            onChange={this.ctrlEnterChangeHandler.bind(this, false)}
+                        />
+                    </div>
+                </div>
+
+                <div className="setting-item">
+                    <div className="setting-title">{L.language}</div>
                     <LanguageSelect />
                 </div>
 
-                <div className="reset-button-wrapper">
+                <div className="setting-item">
                     <ResetButton language={this.props.settings.language} />
                 </div>
 
-            </form>
-        );
+            </div>
+        )
     }
 }
 

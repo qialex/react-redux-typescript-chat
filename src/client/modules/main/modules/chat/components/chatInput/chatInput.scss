@@ -19,11 +19,6 @@
       resize: none;
       //caret-color: #2ec62b;
       flex: 1;
-      //
-      //caret-color: red;
-      //caret-color: #ff0000;
-      //caret-color: rgb(255, 0, 0);
-      //caret-color: hsl(0, 97%, 50%);
 
       &:hover, &:focus {
         outline: none;
@@ -37,6 +32,7 @@
       border-radius: .2em;
       margin: .25em;
       cursor: pointer;
+      text-transform: capitalize;
     }
   }
 

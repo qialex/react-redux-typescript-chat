@@ -6,6 +6,7 @@ import { AppState } from '../../../../../../models'
 
 import './chatInput.scss'
 import {ChangeEvent, SyntheticEvent} from "react";
+import {L} from "../../../../../../utils";
 
 
 const mapStateToProps = (state: AppState, ownProps: OwnProps): ConnectedState => ({
@@ -153,9 +154,9 @@ export class ChatInputComponent extends React.Component<ConnectedState & OwnProp
                            onChange={this.textChangeHandler}
                            onSelect={this.textChangeHandler}
                            value={this.state.chatInput}
-                           placeholder="Write a UserMessage..."
+                           placeholder={L.writeAMessage}
                            required />
-                    <div className="send-button" onClick={this.submitHandler}>Submit</div>
+                    <div className="send-button" onClick={this.submitHandler}>{L.send}</div>
                 </form>
 
                 { this.state.isEmojiPickerVisible ?

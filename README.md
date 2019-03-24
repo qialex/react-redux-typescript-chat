@@ -2,10 +2,10 @@
 React Redux Typescript Chat app
 
 ##Setup
-1. make sure you use **Node.js** version **10.15.3** and **NPM** version **6.4.1**
+1. Make sure you use **Node.js** version **10.15.3** and **NPM** version **6.4.1**
 2. `npm i`
-3. `npm start-server` - keep it running
-4. `npm start` - in a separate window
+4. `npm start-server` - It should create a server on `localhost:3000`. Keep it running. 
+5. `npm start` - In a separate terminal. It should open `localhost:3005`
 
 
 ### Server
@@ -44,9 +44,10 @@ All settings (except `Username`) are stored in `localStorage`.
 6. **Reset Settings** - button. First click changing text to a _confirmation_. If second click will happen in 5 seconds it will reset settings.    
 
 
-### By design restriction
+### Restriction by design
 1. We agree that server is **always** working. There is no handler for a disconnects, unreachable server etc.
 2. User story: "while user is on setting page he/she received let's say 100 messages. Any count more that one screen can display". Better practice would be to count message as _read_ only when it's appears on a user's screen. But as for now, **all** messages will be counted as _read_ when he/she will return to a chat page 
 3. No limit for a message length
 4. We agree that browser correctly display Unicode Emoji. It's being displayed as unicode chars (🦄) without any additional libraries.
+5. Emoji picker is not translated
  

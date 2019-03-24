@@ -6,7 +6,7 @@ import { Action, resetSettingsAction } from '../../redusers/actions'
 
 import { L } from "../../../../../../utils"
 
-
+import './resetButton.scss'
 
 const mapDispatchToProps = (dispatch: redux.Dispatch<Action>): ConnectedDispatch => ({
     resetSettings: () => {
@@ -74,10 +74,10 @@ export class ResetButtonComponent extends React.Component<ConnectedDispatch & Ow
         const pressedTimeout = this.state.pressedTimeout
 
         return (
-            <div className="reset-button">
-                <button onClick={this.handleResetButtonClicked}>
+            <div className="reset-button-wrapper">
+                <div className="reset-button" onClick={this.handleResetButtonClicked}>
                     {pressedTimeout ? L.resetSettingsConfirm : L.resetSettings}
-                </button>
+                </div>
             </div>
         )
     }

@@ -1,0 +1,18 @@
+.settings-wrapper {
+  padding: 1em;
+  line-height: 2;
+
+ .setting-item {
+   padding-bottom: 1em;
+
+   *::first-letter {
+     text-transform: capitalize;
+   }
+
+   .validation {
+     font-size: 75%;
+     line-height: 1;
+     margin-top: .5em;
+   }
+ }
+}
