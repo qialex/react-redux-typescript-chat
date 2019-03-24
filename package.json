@@ -4,12 +4,12 @@
   "description": "React Redux Typescript Chat",
   "main": "index.js",
   "engines": {
-    "node": "=11.9.0",
-    "npm": "=6.5.0"
+    "node": "=10.15.3",
+    "npm": "=6.4.1"
   },
   "scripts": {
     "start-server": "node src/server/server.js",
-    "start": "webpack-dev-server --compress --history-api-fallback --progress --port 3005",
+    "start": "webpack-dev-server --compress --history-api-fallback --progress --port 3005 --open",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

@@ -5,6 +5,7 @@ import EmojiPicker from 'emoji-picker-react'
 import { AppState } from '../../../../../../models'
 
 import './chatInput.scss'
+import {ChangeEvent, SyntheticEvent} from "react";
 
 
 const mapStateToProps = (state: AppState, ownProps: OwnProps): ConnectedState => ({
@@ -22,13 +23,15 @@ interface ConnectedState {
 interface OwnState {
     chatInput: string
     isEmojiPickerVisible: boolean
+    caretPosition: number
 }
 
 export class ChatInputComponent extends React.Component<ConnectedState & OwnProps, OwnState> {
 
     state = {
         chatInput: '',
-        isEmojiPickerVisible: false
+        isEmojiPickerVisible: false,
+        caretPosition: 0,
     }
 
     constructor(props?: ConnectedState & OwnProps) {
@@ -39,9 +42,10 @@ export class ChatInputComponent extends React.Component<ConnectedState & OwnProp
 
     focusChatTextarea(): void {
 
-        const el: HTMLInputElement = document.querySelector('.chat-textarea')
+        const el: HTMLTextAreaElement = document.querySelector('.chat-textarea')
         if (el) {
             el.focus()
+            el.setSelectionRange(this.state.caretPosition, this.state.caretPosition)
         }
     }
 
@@ -92,9 +96,13 @@ export class ChatInputComponent extends React.Component<ConnectedState & OwnProp
         this.manageKeyBoardListener()
     }
 
-    textChangeHandler = (event: any): void => {
+    textChangeHandler = (event: SyntheticEvent): void => {
 
-        this.setState({ chatInput: event.target.value })
+        // getting target
+        const textarea: HTMLTextAreaElement = event.target as HTMLTextAreaElement
+
+        // changing value and saving cursor position
+        this.setState({ chatInput: textarea.value, caretPosition: textarea.selectionStart })
     }
 
     submitHandler = () => {
@@ -112,9 +120,21 @@ export class ChatInputComponent extends React.Component<ConnectedState & OwnProp
         }
     }
 
-    myCallback({...ddd}) {
-        console.log(arguments)
-        this.setState({isEmojiPickerVisible: !this.state.isEmojiPickerVisible})
+    myCallback(emojiCode: string) {
+
+        // getting unicode emoji
+        const emojiUniCode: string = String.fromCodePoint(+`0x${emojiCode}`)
+
+        // inserting into a value
+        const newValue: string =
+            this.state.chatInput.slice(0, this.state.caretPosition)
+            + emojiUniCode
+            + this.state.chatInput.slice(this.state.caretPosition)
+
+        const caretPosition = this.state.caretPosition + emojiUniCode.length
+
+        // setting value, closing, emoji panel
+        this.setState({chatInput: newValue, isEmojiPickerVisible: false, caretPosition})
     }
 
     emojiPickerToggleHandle() {
@@ -126,11 +146,12 @@ export class ChatInputComponent extends React.Component<ConnectedState & OwnProp
             <div className="chat-input-wrapper">
                 <form noValidate>
                     <div className="emoji-toggle-icon" onClick={this.emojiPickerToggleHandle.bind(this)}>
-                        +
+                        🙂
                     </div>
                     <textarea
                            className="chat-textarea"
                            onChange={this.textChangeHandler}
+                           onSelect={this.textChangeHandler}
                            value={this.state.chatInput}
                            placeholder="Write a UserMessage..."
                            required />

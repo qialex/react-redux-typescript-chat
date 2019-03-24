@@ -1,34 +1,47 @@
 .message-wrapper {
+  
   display: flex;
   padding: 1em 1em 0;
 
   &:last-child {
+
     padding-bottom: 1em;
   }
 
   .message {
+
     max-width:80%;
 
     &:not(.from-me) {
+
       margin-right: auto;
     }
     &.from-me {
+
       margin-left: auto;
+
+      .top-line {
+
+        text-align: right;
+      }
     }
 
     .top-line {
+
       display: flex;
       font-size: .8em;
       color: #999999;
       margin-bottom: .2em;
 
       .username {
+
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
       }
 
       .date-time {
+
         margin-left: .3em;
         white-space: nowrap;
         flex: 1;
