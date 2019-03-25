@@ -19,6 +19,9 @@ It's responsive. Tested in Chrome (v 73.0.3683.75) and Firefox (v66.0). In deskt
 ### Localization
 **react-localization** ([npm](https://www.npmjs.com/package/react-localization)) is used for localization. 2 supported languages.
 
+### Themes
+Themes are based scss on `@mixin`s.
+
 ### Top menu
 Two links on _Chat_ and _Settings_, active is underlined.
 ##### Unread messages count
@@ -48,6 +51,7 @@ Own messages displayed on the right, the reset - on the left.
 1. emoji picker
    1. icon will not appear if screen height less than `500px`)
    2. emoji picker will be displayed above the message input if screen `width` is more than `300px`
+   3. emoji is being displayed as unicode chars.
 2. Textarea. Will auto increase height up to 5 lines. Auto focused after a sending message.
 3. Send button working on click or CTRL+ENTER (if turned on in _Settings_)
 
@@ -64,7 +68,6 @@ All settings (except `Username`) are stored in `localStorage`.
 1. We agree that server is **always** working. There is no handler for a disconnects, unreachable server etc.
 2. No user recognition and sessions storage
 3. No handling of manual url #hash manipulations
-4. No limit for a message length and attached Yutube and Image medias
-5. We agree that browser correctly display Unicode Emoji. It's being displayed as unicode chars (🦄) without any additional libraries.
-6. Emoji picker isn't translated as well as skinned
-7. User story: "while user is on setting page he/she received let's say 100 messages. Any count more that one screen can display". Better practice would be to count message as _read_ only when it's appears on a user's screen. But as for now, **all** messages will be counted as _read_ when he/she will return to a chat page
+4. No limit for a message length and attached Youtube and Image medias
+5. Emoji picker isn't translated as well as skinned
+6. User story: "while user is on setting page he/she received let's say 100 messages. Any count more that one screen can display". Better practice would be to count message as _read_ only when it's appears on a user's screen. But as for now, **all** messages will be counted as _read_ when he/she will return to a chat page
