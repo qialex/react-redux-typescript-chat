@@ -136,7 +136,12 @@ export class ChatInputComponent extends React.Component<ConnectedState & OwnProp
         const caretPosition = this.state.caretPosition + emojiUniCode.length
 
         // setting value, closing, emoji panel
-        this.setState({chatInput: newValue, isEmojiPickerVisible: false, caretPosition})
+        this.setState({chatInput: newValue, caretPosition})
+
+        // closing emoji
+        if (this.state.isEmojiPickerVisible) {
+            this.emojiPickerToggleHandle()
+        }
     }
 
     emojiPickerToggleHandle() {
